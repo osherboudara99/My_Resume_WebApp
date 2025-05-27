@@ -32,6 +32,7 @@ llm = load_llm()
 embedder = load_embedder()
 vectorstore = load_vectorstore()
 
+@st.cache_resource
 def extract_keywords_from_resume(resume_dir):
     keywords = set()
     for filename in os.listdir(resume_dir):
