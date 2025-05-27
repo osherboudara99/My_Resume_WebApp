@@ -2,10 +2,8 @@ import streamlit as st
 from llama_cpp import Llama
 from sentence_transformers import SentenceTransformer
 import chromadb
-import logging
 import re
 import os
-import chatbot.chatbot_train as chatbot_train
 
 MODEL_PATH = "C:\\Users\\Osher N Boudara\\.cache\\gpt4all\\Phi-3-mini-4k-instruct.Q4_0.gguf"
 VECTOR_DB_DIR = "db"
