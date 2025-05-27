@@ -15,9 +15,16 @@
 
 /* === Main Content Styling === */
 [data-testid="stApp"] {
-    background-color: #1e1e3f; /* Light gray */
-    color: white; /* Dark text */
+    background-color: #1e1e3f;
+    background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+        url("https://www.transparenttextures.com/patterns/stardust.png");
+    background-repeat: repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    background-position: center;
     font-family: 'Roboto', sans-serif;
+    color: white;
 }
 
 [data-testid="stHeader"] {

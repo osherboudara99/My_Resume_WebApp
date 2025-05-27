@@ -3,6 +3,9 @@ import gdown
 import os 
 from pathlib import Path
 import base64
+import requests
+from datetime import datetime, timezone
+from dateutil import relativedelta
 
 
 # Default Args
@@ -99,3 +102,72 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
 
     resume_markdown = resume_markdown + links_markdown 
     return resume_markdown
+
+#### GITHUB FUNCTIONS
+
+
+def convert_github_timestamp(timestamp):
+    dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    human_readable = dt.strftime("%B %d, %Y at %I:%M %p")
+    now = datetime.now(timezone.utc)
+    delta = relativedelta.relativedelta(now, dt)
+
+    if delta.years > 0:
+        relative = f"{delta.years} year{'s' if delta.years > 1 else ''} ago"
+    elif delta.months > 0:
+        relative = f"{delta.months} month{'s' if delta.months > 1 else ''} ago"
+    elif delta.days > 0:
+        relative = f"{delta.days} day{'s' if delta.days > 1 else ''} ago"
+    elif delta.hours > 0:
+        relative = f"{delta.hours} hour{'s' if delta.hours > 1 else ''} ago"
+    elif delta.minutes > 0:
+        relative = f"{delta.minutes} minute{'s' if delta.minutes > 1 else ''} ago"
+    else:
+        relative = "just now"
+
+    return human_readable, relative
+
+@st.cache_data
+def fetch_languages(owner, repo, token=None):
+    url = f"https://api.github.com/repos/{owner}/{repo}/languages"
+    headers = {"Authorization": f"token {token}"} if token else {}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        keys_str = ' | '.join(response.json().keys())
+        return keys_str
+    else:
+        print(f"Error fetching languages for {repo}: {response.status_code}")
+        return "Unknown"
+
+@st.cache_data
+def get_repos(username, token=None):
+    url = f"https://api.github.com/users/{username}/repos?per_page=100"
+    headers = {"Authorization": f"token {token}"} if token else {}
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        st.error(f"Failed to fetch repos: {response.status_code}")
+        return []
+
+    repos = response.json()
+    formatted_repos = []
+    for repo in repos:
+        languages = fetch_languages(username, repo['name'], token)
+        date_time, relative_time = convert_github_timestamp(repo["updated_at"])
+        created_time, created_relative = convert_github_timestamp(repo["created_at"])
+        formatted_repos.append({
+            "name": repo["name"],
+            "html_url": repo["html_url"],
+            "description": repo["description"],
+            "last_update": date_time,
+            "relative_time": relative_time,
+            "language": languages,
+            "stargazers_count": repo["stargazers_count"],
+            "forks_count": repo["forks_count"],
+            "updated_at": repo["updated_at"],
+            "created_at": repo["created_at"],
+            "created_time": created_time,
+            "created_relative": created_relative,
+            "created_at_dt": datetime.strptime(repo["created_at"], "%Y-%m-%dT%H:%M:%SZ"),
+            "updated_at_dt": datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ"),
+        })
+    return formatted_repos

@@ -48,3 +48,46 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
         
             st.download_button(f"Download {cert_name_display}", data=backend.pdf_reader(cert_path), file_name=cert_name, mime='application/pdf')
 
+def create_repo_sort(repos):
+
+    # Display sorting options in a single row using columns
+    col1, col2 = st.columns([1, 1])
+
+    with col1:
+        sort_key = st.selectbox(
+            "Sort by:",
+            options=["updated_at", "created_at", "name"],
+            format_func=lambda x: {"updated_at": "Last Updated", "created_at": "Created Date", "name": "Name"}[x],
+            key="sort_key"
+        )
+    with col2:
+        sort_order = st.radio(
+            "Order:",
+            options=["descending", "ascending"],
+            horizontal=True,
+            key="sort_order"
+        )
+
+    reverse = sort_order == "descending"
+
+    if sort_key in ["updated_at", "created_at"]:
+        sort_field = f"{sort_key}_dt"
+        repos = sorted(repos, key=lambda r: r[sort_field], reverse=reverse)
+    else:  # sort_key == "name"
+        repos = sorted(repos, key=lambda r: r["name"].lower(), reverse=reverse)
+    
+    return repos
+
+
+def display_repos(repos):
+    for repo in repos:
+        with st.container():
+            st.markdown(f"### [{repo['name']}]({repo['html_url']})")
+            st.markdown(f"**Description:** {repo['description'] or 'No description'}")
+            st.markdown(f"**Created At:** {repo['created_time']} ({repo['created_relative']})")
+            st.markdown(f"**Last Updated:** {repo['last_update']} ({repo['relative_time']})")
+            st.markdown(f"**Language:** {repo['language'] or 'Not specified'}")
+            st.markdown(f"**GitHub URL:** {repo['html_url']}")
+            if repo['stargazers_count'] > 0 or repo['forks_count'] > 0:
+                st.markdown(f"⭐ Stars: {repo['stargazers_count']} | 🍴 Forks: {repo['forks_count']}")
+            st.markdown("---")
