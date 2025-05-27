@@ -31,8 +31,6 @@ else:
 
 
 
-st.markdown('---')
-
 
 
 
