@@ -1,24 +1,14 @@
 import streamlit as st
-from llama_cpp import Llama
+import openai
 from sentence_transformers import SentenceTransformer
 import chromadb
 import re
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
-MODEL_PATH = "C:\\Users\\Osher N Boudara\\.cache\\gpt4all\\Phi-3-mini-4k-instruct.Q4_0.gguf"
 VECTOR_DB_DIR = "db"
 
-# Load model
-@st.cache_resource
-def load_llm():
-    return Llama(
-        model_path=MODEL_PATH,
-        n_ctx=4096,
-        n_threads=6,
-        n_gpu_layers=35,
-        temperature=0.7,
-        stop=["User:", "Assistant:"]
-    )
 @st.cache_resource
 def load_embedder():
     return SentenceTransformer("all-MiniLM-L6-v2")
@@ -27,10 +17,6 @@ def load_embedder():
 def load_vectorstore():
     client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
     return client.get_or_create_collection("osher_docs")
-
-llm = load_llm()
-embedder = load_embedder()
-vectorstore = load_vectorstore()
 
 @st.cache_resource
 def extract_keywords_from_resume(resume_dir):
@@ -52,17 +38,43 @@ def extract_keywords_from_resume(resume_dir):
                         keywords.add(word.lower())
     return list(keywords)
 
-RESUME_DIR = os.path.join(os.getcwd(), "resume")
-AUTO_KEYWORDS = extract_keywords_from_resume(RESUME_DIR)
+def call_openai(prompt, max_tokens=150):
+    try:
+        client = openai.OpenAI(api_key=os.environ.get("OPENAI_KEY"))
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context. Provide a single, concise answer. Do NOT answer any other questions. Do NOT generate any additional questions or answers. If the answer is not in the context, say: \"I'm sorry, I can only answer questions about Osher Boudara or general small talk.\" Do NOT make up any information or use knowledge outside the context. Do not infer or guess."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=max_tokens,
+            temperature=0.7,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        # Check for quota error
+        if hasattr(e, "status_code") and e.status_code == 429:
+            try:
+                error_data = e.response.json()
+                if (
+                    "error" in error_data
+                    and error_data["error"].get("code") == "insufficient_quota"
+                ):
+                    return "⚠️ The OpenAI usage limits have been reached for this month. Please try again next month or contact the site owner."
+            except Exception:
+                pass
+        print("OpenAI API error:", e)
+        return "I'm sorry, I couldn't generate a response. Please try again later."
 
 def retrieve_and_answer(query):
-    # General responses as before...
     general_responses = {
         "hi how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hello how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hi how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "hello how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "how are you": "I'm doing well, thank you for asking! How can I help you today?",
+        "how are you?": "I'm doing well, thank you for asking! How can I help you today?",
+        "what is your name": "I am Rebbe, an AI assistant here to answer questions about Osher Boudara based on the provided context.",
         "what is the weather like": "I’m unable to provide real-time weather information, but you can check your local weather service for the latest updates!",
         "who are you": "I am Rebbe, an AI assistant here to answer questions about Osher Boudara based on the provided context.",
         "hello": "Hello! How can I assist you today?",
@@ -90,31 +102,24 @@ def retrieve_and_answer(query):
     docs = [doc for sublist in docs for doc in (sublist if isinstance(sublist, list) else [sublist])]
     context = "\n".join(docs)
 
-    # Only check if context is not empty
     if not context.strip():
         return "I'm sorry, I can only answer questions about Osher Boudara or general small talk."
 
-    prompt = f"""You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context.
-Provide a single, concise answer to the user's question. Do NOT answer any other questions. Do NOT generate any additional questions or answers.
-If the answer is not in the context, say: "I'm sorry, I can only answer questions about Osher Boudara or general small talk."
-Do NOT make up any information or use knowledge outside the context. Do not infer or guess.
+    prompt = f"""
+        Context:
+        {context}
 
-Context:
-{context}
-
-User's Question: {query}
-"""
+        User's Question: {query}
+    """
 
     try:
-        response = llm(prompt, max_tokens=150)
-        answer = response["choices"][0]["text"].strip()
+        answer = call_openai(prompt, max_tokens=150)
         # Remove lines starting with dashes or section headers
         cleaned_lines = []
         for line in answer.split('\n'):
             if line.strip() and not line.strip().startswith("-") and not re.match(r"^[#\u25A0\u25CF]", line.strip()):
                 cleaned_lines.append(line.strip())
         answer = " ".join(cleaned_lines)
-        # Keep only the first sentence if needed
         answer = answer.split(".")[0].strip() + "."
         forbidden_entities = [
             "florida department of agriculture", "chief data officer", "mit", "berkeley", "brown university"
@@ -155,3 +160,12 @@ def create_sidebar():
                     st.markdown(f"**Rebbe:** {msg}")
                 else:
                     st.markdown(msg)
+
+embedder = load_embedder()
+vectorstore = load_vectorstore()
+RESUME_DIR = os.path.join(os.getcwd(), "resume")
+AUTO_KEYWORDS = extract_keywords_from_resume(RESUME_DIR)
+
+
+openai.api_key = os.environ.get("OPENAI_KEY")
+
