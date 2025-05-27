@@ -4,10 +4,6 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 import re
 import os
-from dotenv import load_dotenv
-load_dotenv()
-
-VECTOR_DB_DIR = "db"
 
 @st.cache_resource
 def load_embedder():
@@ -15,32 +11,13 @@ def load_embedder():
 
 @st.cache_resource
 def load_vectorstore():
-    client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
+    client = chromadb.PersistentClient(path="db")
     return client.get_or_create_collection("osher_docs")
 
-@st.cache_resource
-def extract_keywords_from_resume(resume_dir):
-    keywords = set()
-    for filename in os.listdir(resume_dir):
-        if filename.endswith(".md") or filename.endswith(".txt"):
-            with open(os.path.join(resume_dir, filename), "r", encoding="utf-8") as f:
-                text = f.read()
-                headers = re.findall(r"#+\s*([^\n]+)", text)
-                bolded = re.findall(r"\*\*([^\*]+)\*\*", text)
-                italicized = re.findall(r"\*([^\*]+)\*", text)
-                for group in [headers, bolded, italicized]:
-                    for item in group:
-                        for word in re.findall(r"\b[a-zA-Z][a-zA-Z\-']+\b", item):
-                            if len(word) > 2:
-                                keywords.add(word.lower())
-                for word in re.findall(r"\b[A-Z][a-zA-Z\-']+\b", text):
-                    if len(word) > 2:
-                        keywords.add(word.lower())
-    return list(keywords)
 
 def call_openai(prompt, max_tokens=150):
     try:
-        client = openai.OpenAI(api_key=os.environ.get("OPENAI_KEY"))
+        client = openai.OpenAI(api_key=st.secrets["OPENAI_KEY"])
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -94,7 +71,7 @@ def retrieve_and_answer(query):
 
     # Retrieve more relevant chunks
     try:
-        results = vectorstore.query(query_embeddings=[query_embedding], n_results=5)
+        results = vectorstore.query(query_embeddings=[query_embedding], n_results=10)
     except Exception as e:
         return f"An error occurred while querying the database: {str(e)}"
 
@@ -153,7 +130,8 @@ def create_sidebar():
                 answer = "\n".join(lines)
             st.session_state.chat_history.append(("User", user_input))
             st.session_state.chat_history.append(("Rebbe", answer))
-        # Display chat history (newest at bottom)
+        
+        # Display chat history 
         for sender, msg in st.session_state.chat_history:
             with st.chat_message("user" if sender == "User" else "assistant"):
                 if sender == "Rebbe":
@@ -163,9 +141,4 @@ def create_sidebar():
 
 embedder = load_embedder()
 vectorstore = load_vectorstore()
-RESUME_DIR = os.path.join(os.getcwd(), "resume")
-AUTO_KEYWORDS = extract_keywords_from_resume(RESUME_DIR)
-
-
-openai.api_key = os.environ.get("OPENAI_KEY")
 

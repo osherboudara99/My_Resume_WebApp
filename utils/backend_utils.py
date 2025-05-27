@@ -14,7 +14,7 @@ resume_url = 'https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5
 resume_directory_path = f"{dir_path}\\resume\\"
 resume_name = 'osher_boudara_resume.pdf'
 resume_pdf_path = resume_directory_path + resume_name
-
+github_key = st.secrets["GITHUB_KEY"]
 
 
 
@@ -28,8 +28,6 @@ def read_file_object(markdown_file):
     return Path(markdown_file).read_text()
 
 
-
-
 @st.cache_data
 def download_google_doc_file(url, output_file_name):
 
@@ -38,6 +36,7 @@ def download_google_doc_file(url, output_file_name):
 @st.cache_data
 def download_multiple_google_doc_files(file_path:str=resume_pdf_path, url:str=resume_url, additional_file_formats:list=['pdf', 'md']):
     
+    # Download resume in multiple formats
     export_str = 'export?format='
 
     file_extension = file_path.split('.')[1]
@@ -65,6 +64,7 @@ def pdf_reader(pdf_file):
 
 @st.cache_data
 def read_and_correct_resume_markdown(dir_path = dir_path):
+    # Clean up resume format for displaying on app
 
     resume_markdown = read_file_object(fr"{dir_path}\resume\osher_boudara_resume.md")
     email_number_aligned = """
@@ -105,7 +105,6 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
 
 #### GITHUB FUNCTIONS
 
-
 def convert_github_timestamp(timestamp):
     dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     human_readable = dt.strftime("%B %d, %Y at %I:%M %p")
@@ -128,7 +127,7 @@ def convert_github_timestamp(timestamp):
     return human_readable, relative
 
 @st.cache_data
-def fetch_languages(owner, repo, token=None):
+def fetch_languages(owner, repo, token=github_key):
     url = f"https://api.github.com/repos/{owner}/{repo}/languages"
     headers = {"Authorization": f"token {token}"} if token else {}
     response = requests.get(url, headers=headers)
@@ -140,12 +139,11 @@ def fetch_languages(owner, repo, token=None):
         return "Unknown"
 
 @st.cache_data
-def get_repos(username, token=None):
+def get_repos(username, token=github_key):
     url = f"https://api.github.com/users/{username}/repos?per_page=100"
     headers = {"Authorization": f"token {token}"} if token else {}
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
-        st.error(f"Failed to fetch repos: {response.status_code}")
         return []
 
     repos = response.json()

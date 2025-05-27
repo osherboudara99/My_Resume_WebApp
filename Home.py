@@ -23,11 +23,16 @@ frontend.home_page_header_setup()
 
 repos = backend.get_repos(GITHUB_USERNAME)
 
-repos = frontend.create_repo_sort(repos)
+if not repos:
+    st.warning("🚧 Projects couldn't be retrieved at this time (e.g., GitHub API limit reached). Please try again later.")
+else:
+    repos = frontend.create_repo_sort(repos)
+    frontend.display_repos(repos)
+
+
 
 st.markdown('---')
 
-frontend.display_repos(repos)
 
 
 
