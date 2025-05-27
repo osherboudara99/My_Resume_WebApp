@@ -10,6 +10,8 @@ import os
 
 dir_path = os.getcwd()
 
+GITHUB_USERNAME = "osherboudara99"
+
 
 # Call the function to load the CSS
 frontend.load_css()
@@ -99,10 +101,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-
-GITHUB_USERNAME = "osherboudara99"
+st.write()
 st.markdown('---')
 
+st.write()
 
 st.title(f"My GitHub Repositories")
 st.markdown("<hr style='border:1px solid #ccc' />", unsafe_allow_html=True)

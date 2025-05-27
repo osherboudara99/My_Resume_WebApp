@@ -87,7 +87,6 @@ def display_repos(repos):
             st.markdown(f"**Created At:** {repo['created_time']} ({repo['created_relative']})")
             st.markdown(f"**Last Updated:** {repo['last_update']} ({repo['relative_time']})")
             st.markdown(f"**Language:** {repo['language'] or 'Not specified'}")
-            st.markdown(f"**GitHub URL:** {repo['html_url']}")
             if repo['stargazers_count'] > 0 or repo['forks_count'] > 0:
                 st.markdown(f"⭐ Stars: {repo['stargazers_count']} | 🍴 Forks: {repo['forks_count']}")
             st.markdown("---")
