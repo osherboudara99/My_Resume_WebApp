@@ -1,7 +1,6 @@
 chromadb
 gdown
 sentence_transformers
-streamlit_pdf_viewer
 llama-cpp-python
 requests 
 datetime
