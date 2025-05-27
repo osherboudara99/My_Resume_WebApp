@@ -3,4 +3,5 @@ gdown
 sentence_transformers
 openai
 requests 
+streamlit-pdf-viewer
 datetime
