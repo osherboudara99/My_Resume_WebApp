@@ -5,3 +5,5 @@ openai
 requests 
 streamlit-pdf-viewer
 datetime
+torch
+nltk

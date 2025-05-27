@@ -1,9 +1,11 @@
 import streamlit as st
 import openai
 from sentence_transformers import SentenceTransformer
+import sys
+
+
 import chromadb
 import re
-import os
 
 @st.cache_resource
 def load_embedder():
