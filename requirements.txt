@@ -2,6 +2,5 @@ chromadb
 gdown
 sentence_transformers
 openai
-python-dotenv
 requests 
 datetime
