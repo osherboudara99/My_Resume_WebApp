@@ -1,7 +1,14 @@
+import sys
+import types
+
+# Prevent Streamlit from inspecting `torch.classes` which breaks things
+sys.modules['torch.classes'] = types.SimpleNamespace()
+
 import streamlit as st
 import streamlit.components.v1 as components
 
 st.set_page_config(layout='wide', page_title='Home', page_icon=":house:")
+
 
 import utils.backend_utils as backend, utils.frontend_utils as frontend, utils.chatbot_utils as chatbot
 import time
