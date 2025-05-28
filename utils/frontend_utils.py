@@ -62,12 +62,12 @@ def create_repo_sort(repos):
     with col2:
         sort_order = st.radio(
             "Order:",
-            options=["descending", "ascending"],
+            options=["Descending", "Ascending"],
             horizontal=True,
             key="sort_order"
         )
 
-    reverse = sort_order == "descending"
+    reverse = sort_order == "Descending"
 
     if sort_key in ["updated_at", "created_at"]:
         sort_field = f"{sort_key}_dt"
@@ -86,6 +86,8 @@ def display_repos(repos):
             st.markdown(f"**Created At:** {repo['created_time']} ({repo['created_relative']})")
             st.markdown(f"**Last Updated:** {repo['last_update']} ({repo['relative_time']})")
             st.markdown(f"**Language:** {repo['language'] or 'Not specified'}")
+            # if repo['fork']:
+            #     st.markdown("**Forked:** Yes")
             if repo['stargazers_count'] > 0 or repo['forks_count'] > 0:
                 st.markdown(f"⭐ Stars: {repo['stargazers_count']} | 🍴 Forks: {repo['forks_count']}")
             st.markdown("---")

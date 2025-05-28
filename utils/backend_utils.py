@@ -159,6 +159,7 @@ def get_repos(username, token=github_key):
             "last_update": date_time,
             "relative_time": relative_time,
             "language": languages,
+            "fork":repo["fork"],
             "stargazers_count": repo["stargazers_count"],
             "forks_count": repo["forks_count"],
             "updated_at": repo["updated_at"],
