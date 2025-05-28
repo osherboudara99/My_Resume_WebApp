@@ -5,17 +5,16 @@
 
 ## **EXPERIENCE**
 
-#### **Cognizant**  *\-  Associate Data Scientist* \[\[BR\]\]					       	Aug. 2022 \- Present
+#### **Cognizant**  *\-  Senior Associate Data Scientist (Promoted from Associate May 2025\)*\[\[BR\]\]	  Aug. 2022 \- Present
 
-* Leading and developing projects in multiple data science and engineering teams in the crop science division of a global Fortune 500 client company, adapting to evolving requirements and delivering solutions to stakeholders.  
-* Implementing data science life cycle components: project scoping, data ingestion tools, data warehouse management, automated ETL pipelines, MLOps, AWS/GCP cloud-computing, version control, and visualization tools.  
-* Developer of Climate Change Impact and Adaptation tools; a customizable crop modeling framework, utilizing ETL pipelines, complex data science techniques, and MLOps, that simulates the crop growing cycle under different climate change scenarios anywhere globally. Informs business strategy, allowing client company to maintain revenue while mitigating climate change risks, and provides strategic insights on crop yield shifts, optimal environmental conditions, agro-management practices, gas emissions, etc. and how climate change impacts these factors through 2100\.   
-* Delivered the patentable Market Share Forecast tool employing ML Ops and data science techniques for predictions, classification, and feature extraction, providing unprecedented, actionable insights on market share shifts and its drivers.
+* Developing data science and engineering projects for the crop science division of a Fortune 500 client, delivering stakeholder-driven solutions across the full data science lifecycle — project scoping, data ingestion, ETL automation, data warehousing, MLOps, cloud infrastructure (AWS/GCP), version control, and visualization.  
+* Developer of Climate Change Impact and Adaptation tools; a customizable crop modeling framework, utilizing ETL pipelines, complex data science techniques, and MLOps, that simulates the crop growing cycle under different climate change scenarios anywhere globally. Informs business strategy, allowing client company to maintain revenue while mitigating climate change risks, and provides strategic actionable insights on crop yield shifts, optimal environmental conditions, agro-management practices, gas emissions, etc. and how climate change impacts these factors through 2100\.   
+* Delivered the patentable Market Share Forecast tool employing data science techniques and MLOps for predictions, classification, and feature extraction — yielding unprecedented insights into market share shifts and their key drivers.
 
 #### **Hoffman Brothers Realty** *\-  Python Developer* \[\[BR\]\]				       	Jan. 2022 \- Dec. 2022
 
-* Implemented automation in Python using various AWS services (Lambda, Eventbridge, S3, etc.) to save company time and labor expenses. Advisement on additional areas of automation and providing maintenance as needed.  
-* Constructed Python scripts to interact with the company's Airtable database, performing CRUD operations and EDA to understand changing market trends and customer insights.
+* Developed automated workflows in Python using AWS (Lambda, EventBridge, S3), including an application import tool that parses and migrates hundreds of applications weekly to Airtable, reducing labor costs by thousands monthly. Identified additional automation opportunities and maintained existing pipelines.  
+* Engineered Python scripts for CRUD ops and EDA on Airtable data to uncover market trends and enhance productivity.
 
 #### **Cherre** *\- Data Engineer Intern* \[\[BR\]\]				       		             May 2021 \- Aug. 2021
 

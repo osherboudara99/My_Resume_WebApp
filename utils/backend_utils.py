@@ -13,7 +13,7 @@ dir_path = os.getcwd()
 resume_url = 'https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5QiKQCwdsKMlQA/'
 resume_directory_path = os.path.join(dir_path, 'resume', 'self.jpeg')
 resume_name = 'osher_boudara_resume.pdf'
-resume_pdf_path = resume_directory_path + resume_name
+resume_pdf_path = os.path.join(dir_path, 'resume', resume_name)
 github_key = st.secrets["GITHUB_KEY"]
 
 
