@@ -118,7 +118,7 @@ def retrieve_and_answer(query):
 
 def create_sidebar():
     with st.sidebar:
-        st.markdown("### 💬 Chat with Rebbe! (BETA)")
+        st.markdown("### 💬 Chat with Rebbe!")
         st.markdown("Ask anything about Osher — resume, skills, projects, and more.")
 
         if "chat_history" not in st.session_state:

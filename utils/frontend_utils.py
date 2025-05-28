@@ -13,21 +13,6 @@ def load_css(file_name=os.path.join(dir_path, 'utils', 'style.css')):
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-def create_aboutme(dir_path=dir_path):
-
-
-    st.sidebar.markdown("<h1 style='text-align: center; color: white;'>Osher's Resume App</h1>", unsafe_allow_html=True)
-    st.sidebar.image(os.path.join(dir_path, 'resume', 'self.jpeg'))
-
-    st.sidebar.markdown("## __About Osher__")
-
-
-    about = "I am a data scientist with a passion for transforming dataframes into actionable insights. \
-    With a background in computer science and statistics, I specialize in building robust machine learning algorithms and conducting statistical analysis of any dataset that comes my way. \
-    My expertise in Python, SQL and cloud-based architectures have allowed me to develop scalable tools that provide unique solutions."
-
-    st.sidebar.write(about)
-
 def resume_view_and_download(resume_pdf_path = backend.resume_pdf_path, resume_download_name=backend.resume_name):
     with st.expander('View Resume PDF'):
         pdf_viewer(resume_pdf_path)
@@ -163,13 +148,13 @@ def home_page_header_setup():
             As a Senior Data Scientist at Cognizant, I am leading and developing projects in data science and engineering teams for the crop science division of a global Fortune 500 company. I use my data science skillset to deliver solutions that meet the client's needs and expectations.
             </p>
             <p>
-            I have a B.S. in Computer Science and a minor in Statistics from California State University, Northridge, where I graduated with honors. I am passionate about conducting statistical research and transforming dataframes into actionable insights. 
+            I have a B.S. in Computer Science and a minor in Statistics from California State University, Northridge, where I graduated with honors. I am passionate about conducting statistical research and transforming dataframes into actionable insights. My expertise in Python, SQL and cloud-based architectures have allowed me to develop scalable tools that provide unique solutions.
             </p>
             <p>
-            Fun facts about me: I'm bilingual and currently based in Boston, MA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a proud fan of the Los Angeles Rams.
+            Fun facts about me: I'm bilingual and currently based in Boston, MA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a fan of the Los Angeles Rams.
             </p>
             <p>
-            Chat with my friend Rebbe, to learn more about me and my work!
+            Chat with my friend Rebbe in the sidebar, to learn more about me and my work!
             </p>
         </div>
     </div>

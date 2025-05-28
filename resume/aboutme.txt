@@ -1,6 +1,6 @@
 ### 💼 Professional Experience
 
-**Cognizant** — Senior Associate Data Scientist (June 2025 – Present)
+**Cognizant** — Senior Associate Data Scientist (May 2025 – Present)
 - Promoted in recognition of technical excellence and project leadership
 - Continue leading end-to-end data science projects for Fortune 500 crop science client
 - Implement comprehensive data science lifecycle including:
@@ -10,7 +10,7 @@
   - MLOps and cloud infrastructure (AWS/GCP)
   - Version control and visualization
 
-**Cognizant** — Associate Data Scientist (Aug 2022 – June 2025)
+**Cognizant** — Associate Data Scientist (Aug 2022 – May 2025)
 - Developed Climate Change Impact and Adaptation Tool:
   - Built customizable crop modeling framework using ETL pipelines and MLOps
   - Simulates crop growing cycles under climate change scenarios through 2100
