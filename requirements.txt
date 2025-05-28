@@ -8,3 +8,4 @@ datetime
 torch
 nltk
 pysqlite3-binary
+streamlit-pdf-viewer
