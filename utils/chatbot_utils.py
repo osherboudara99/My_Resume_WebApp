@@ -13,7 +13,7 @@ def load_embedder():
 
 @st.cache_resource
 def load_vectorstore():
-    client = chromadb.PersistentClient(path="db")
+    client = chromadb.PersistentClient(path="db/osher_docs.duckdb")
     return client.get_or_create_collection("osher_docs")
 
 
