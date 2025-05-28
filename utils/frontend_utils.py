@@ -8,7 +8,7 @@ import time
 
 dir_path = os.getcwd()
 
-def load_css(file_name=fr'{dir_path}\utils\style.css'):
+def load_css(file_name=os.path.join(dir_path, 'utils', 'style.css')):
     with open(file_name) as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
@@ -17,7 +17,8 @@ def create_aboutme(dir_path=dir_path):
 
 
     st.sidebar.markdown("<h1 style='text-align: center; color: white;'>Osher's Resume App</h1>", unsafe_allow_html=True)
-    st.sidebar.image(fr'{dir_path}\resume\self.jpeg')
+    st.sidebar.image(os.path.join(dir_path, 'resume', 'self.jpeg'))
+
     st.sidebar.markdown("## __About Osher__")
 
 
@@ -37,7 +38,7 @@ def resume_view_and_download(resume_pdf_path = backend.resume_pdf_path, resume_d
 
 
 def certification_view(cert_name, cert_name_display, credential_link=None, dir_path=dir_path, validate=None):
-    cert_path = fr'{dir_path}\certifications\{cert_name}'
+    cert_path = os.path.join(dir_path, 'certifications', cert_name)
 
 
     with st.container():
@@ -148,7 +149,7 @@ def home_page_header_setup():
 
 
 
-    img_base64 = backend.get_base64_image(f"{dir_path}/resume/self.jpeg")
+    img_base64 = backend.get_base64_image(os.path.join(dir_path, 'resume', 'self.jpeg'))
 
     st.markdown(f"""
     <div style="display: flex; flex-direction: row; align-items: center; background-color: #1e1e3f; padding: 30px; border-radius: 15px; color: white; gap: 30px;">

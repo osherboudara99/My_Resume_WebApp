@@ -1,5 +1,5 @@
 ## Run this script to train chatbot
-## Execute chroma-migrate in terminal after
+
 
 import os
 import re

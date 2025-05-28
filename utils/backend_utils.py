@@ -11,7 +11,7 @@ from dateutil import relativedelta
 # Default Args
 dir_path = os.getcwd()
 resume_url = 'https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5QiKQCwdsKMlQA/'
-resume_directory_path = f"{dir_path}\\resume\\"
+resume_directory_path = os.path.join(dir_path, 'resume', 'self.jpeg')
 resume_name = 'osher_boudara_resume.pdf'
 resume_pdf_path = resume_directory_path + resume_name
 github_key = st.secrets["GITHUB_KEY"]
@@ -66,7 +66,7 @@ def pdf_reader(pdf_file):
 def read_and_correct_resume_markdown(dir_path = dir_path):
     # Clean up resume format for displaying on app
 
-    resume_markdown = read_file_object(fr"{dir_path}\resume\osher_boudara_resume.md")
+    resume_markdown = read_file_object(os.path.join(dir_path, 'resume', 'osher_boudara_resume.md'))
     email_number_aligned = """
         <p style='text-align: center; font-size: 18px;'>
             <a href='mailto:osherboudara99@gmail.com'>osherboudara99@gmail.com</a> | 818.809.4261
