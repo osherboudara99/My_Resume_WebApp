@@ -1,14 +1,34 @@
 ### 💼 Professional Experience
 
-**Cognizant** — Associate Data Scientist (Aug 2022 – Present)
-- Lead and develop projects in data science and engineering teams for a Fortune 500 crop science client.
-- Implement data science lifecycle: project scoping, data ingestion, data warehouse management, ETL pipelines, MLOps, AWS/GCP, version control, visualization.
-- Developed Climate Change Impact and Adaptation tools: crop modeling framework for simulating crop growth under climate scenarios.
-- Delivered Market Share Forecast tool: machine learning for predictions, classification, and feature extraction.
+**Cognizant** — Senior Associate Data Scientist (June 2025 – Present)
+- Promoted in recognition of technical excellence and project leadership
+- Continue leading end-to-end data science projects for Fortune 500 crop science client
+- Implement comprehensive data science lifecycle including:
+  - Project scoping and stakeholder management
+  - Data ingestion and ETL automation
+  - Data warehouse management
+  - MLOps and cloud infrastructure (AWS/GCP)
+  - Version control and visualization
 
-**Hoffman Brothers Realty** — Python Developer (Previous Role)
-- Automated workflows using AWS (Lambda, EventBridge, S3), reducing time and labor costs.
-- Built Python scripts for database operations and exploratory data analysis (EDA).
+**Cognizant** — Associate Data Scientist (Aug 2022 – June 2025)
+- Developed Climate Change Impact and Adaptation Tool:
+  - Built customizable crop modeling framework using ETL pipelines and MLOps
+  - Simulates crop growing cycles under climate change scenarios through 2100
+  - Provides insights on crop yields, environmental conditions, and agro-management
+  - Helps maintain revenue while mitigating climate change risks
+- Delivered patentable Market Share Forecast Tool:
+  - Employs advanced MLOps and data science techniques for predictions, classification and feature extraction
+  - Provides insights into market share shifts and key drivers
+
+**Hoffman Brothers Realty** — Python Developer (Jan 2022 - Dec 2022)
+- Developed automated workflows using AWS services:
+  - Built application import tool processing hundreds of applications weekly
+  - Reduced monthly labor costs by thousands through automation
+  - Utilized Lambda, EventBridge, and S3 for pipeline management
+- Created Python scripts for database operations and analytics:
+  - Implemented CRUD operations for Airtable database
+  - Conducted exploratory data analysis (EDA) to uncover market trends
+  - Enhanced team productivity through automated reporting
 
 ---
 
@@ -18,16 +38,27 @@
 - Associate’s Degree in Mathematics from Los Angeles Valley College.
 - B.S. in Computer Science, minor in Statistics, from California State University, Northridge (CSUN).
 - Gap year at Bar Ilan University, Tel Aviv.
+- Currently lives in Cambridge, MA.
 
 ---
 
 ### 💻 Key Projects
 
-- **Climate Impact and Adaptation Tool**: Simulates global crop growth under climate change scenarios; provides business insights.
-- **Song Popularity Prediction**: Predicts song popularity using Spotify data and regression models (XGBoost, Random Forest).
-- **Loan Default Prediction**: Compares classification models to predict loan defaults.
-- **RoommateFinderApp**: Mobile app (React Native, Python) for finding roommates.
-- **Resume WebApp**: Streamlit app showcasing resume, certifications, and projects.
+- **Climate Impact and Adaptation Tool**: [Python, AWS] Simulates global crop growth under climate change scenarios; provides business insights.
+- **Song Popularity Prediction**: [Python, XGBoost, Random Forest] Predicts song popularity using Spotify data and regression models.
+- **Loan Default Prediction**: [Python, Scikit-learn] Compares classification models to predict loan defaults.
+- **RoommateFinderApp**: [React Native, Python] Mobile app for finding roommates.
+- **Resume WebApp**: [Python, Streamlit] Interactive app showcasing resume, certifications, and projects.
+- **JC-Plus**: [Java, C] Programming Language that adds objects and class-based inheritance to C.
+
+---
+
+### 🛠️ Technical Skills
+
+- **Programming Languages**: Python, SQL, Java, C/C++
+- **Cloud & DevOps**: AWS, GCP, Git
+- **Data Science**: Machine Learning, Statistical Analysis, ETL, MLOps
+- **Certifications**: AWS Certified Solution Architect, Azure Fundamentals (AZ900), Machine Learning Specialization, Database Technician
 
 ---
 
@@ -36,7 +67,7 @@
 - Playing guitar, bass, and synthesizer.
 - Exploring new music (five new albums weekly on average).
 - Hiking, golf, tennis, and exploring nature.
-- Following NFL and UFC.
+- Following NFL (favorite team is the LA Rams) and UFC. 
 - Traveling, trying new foods, watching documentaries, playing video games.
 
 ---
