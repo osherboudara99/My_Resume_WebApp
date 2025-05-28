@@ -7,3 +7,4 @@ streamlit-pdf-viewer
 datetime
 torch
 nltk
+pysqlite3-binary

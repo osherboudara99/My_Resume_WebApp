@@ -167,7 +167,7 @@ def embed_and_store(test_mode=False):
     try:
         embedder = SentenceTransformer(MODEL_NAME)
         embeddings = embedder.encode(texts).tolist()
-        client = chromadb.PersistentClient(path="db/osher_docs.duckdb")
+        client = chromadb.PersistentClient(path="db")
         collection = client.get_or_create_collection("osher_docs")
         collection.add(documents=texts, ids=ids, embeddings=embeddings)
         logging.info(f"Embedded {len(texts)} section-based chunks.")
