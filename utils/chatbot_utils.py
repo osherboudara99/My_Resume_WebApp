@@ -78,7 +78,7 @@ def retrieve_and_answer(query):
 
     # Retrieve more relevant chunks
     try:
-        results = vectorstore.query(query_embeddings=[query_embedding], n_results=10)
+        results = vectorstore.query(query_embeddings=[query_embedding], n_results=15)
     except Exception as e:
         return f"An error occurred while querying the database: {str(e)}"
 
