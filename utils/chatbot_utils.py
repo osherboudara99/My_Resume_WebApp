@@ -3,10 +3,10 @@ import openai
 from sentence_transformers import SentenceTransformer
 import sys
 # Add pysqlite3 support for Streamlit Cloud
-import platform
-if platform.system() != "Windows":
-    __import__('pysqlite3')
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# import platform
+# if platform.system() != "Windows":
+#     __import__('pysqlite3')
+#     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 
 import chromadb
@@ -24,7 +24,7 @@ def load_vectorstore():
 
 def call_openai(prompt, max_tokens=150):
     try:
-        client = openai.OpenAI(api_key=st.secrets["OPENAI_KEY"])
+        client = openai.OpenAI(api_key=st.secrets.get("OPENAI_KEY") or os.getenv("OPENAI_KEY"))
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
