@@ -28,7 +28,10 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
 
     with st.container():
         with st.expander(f'View {cert_name_display} PDF'):
-            pdf_viewer(cert_path, width=700, height=1000)
+            if cert_name == 'Osher_B_AZ900_cert_rotated.pdf':
+                pdf_viewer(cert_path, width=700, height=1000)
+            else:
+                pdf_viewer(cert_path, width="100%", height=1000)
             if credential_link:
                 st.markdown(f'Link to [{cert_name_display}]({credential_link}) credential/badge')
         
