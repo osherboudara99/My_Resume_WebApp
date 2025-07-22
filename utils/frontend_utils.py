@@ -43,24 +43,25 @@ def create_repo_sort(repos):
 
     st.markdown("""
         <style>
-        /* Make all selectbox and radio text white */
-        .stSelectbox > div, .stRadio > div {
-            color: white !important;
-        }
-        
-        /* Style the labels */
+        /* General widget text color (labels, selectbox) */
+        .stSelectbox > div, .stRadio > div,
         label, .stSelectbox label, .stRadio label {
             color: white !important;
         }
 
-        /* Style options in select dropdown */
+        /* Force dropdown options to be white */
         div[role="listbox"] > div {
             color: white !important;
-            background-color: #1e1e1e !important;  /* Optional: dark dropdown background */
+            background-color: #1e1e1e !important;
         }
 
-        /* Optional: make radio button selection text white */
-        div[data-baseweb="radio"] label {
+        /* Force radio button text to white */
+        div[data-baseweb="radio"] label span {
+            color: white !important;
+        }
+
+        /* Optional: override selected radio option styling */
+        div[data-baseweb="radio"] input:checked + div > label > span {
             color: white !important;
         }
         </style>
