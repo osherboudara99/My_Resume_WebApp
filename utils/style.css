@@ -202,3 +202,10 @@ div[data-baseweb="select"]:hover {
     border-color: #1e1e3f !important;
 }
 
+/* Hide stray accessibility labels sometimes rendered by Streamlit */
+[aria-live="polite"], [aria-label="keyboard"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+

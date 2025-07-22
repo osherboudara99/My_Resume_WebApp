@@ -117,47 +117,26 @@ def retrieve_and_answer(query):
 
 
 def create_sidebar():
-    st.markdown(
-    """
-    <style>
-    /* Hide the tooltip text on sidebar collapse/expand button */
-    button[title] {
-        pointer-events: none;  /* disable hover events */
-    }
-    button[title]:hover::after {
-        content: none !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-    )
+    # Inject CSS for chat input styling
+    st.markdown("""
+        <style>
+        /* Chat input background and text color */
+        textarea[data-testid="stChatInput"] {
+            background-color: #1e1e3f !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+            border: 2px solid #343A40 !important;
+            font-family: 'Roboto', sans-serif !important;
+            font-size: 1rem !important;
+            caret-color: white !important;
+        }
+        textarea[data-testid="stChatInput"]::placeholder {
+            color: #fff !important;
+            opacity: 0.7;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-    st.markdown(
-    f"""
-    <style>
-    /* Style chat input container */
-    div[data-testid="stChatInput"] textarea {{
-        background-color: #1e1e3f !important;
-        color: white !important;
-        border: 1px solid #444;  /* optional: subtle border */
-        font-size: 16px;          /* optional: adjust font size */
-    }}
-
-    /* Style the placeholder text */
-    div[data-testid="stChatInput"] textarea::placeholder {{
-        color: #bbb;              /* lighter placeholder */
-        opacity: 1;
-    }}
-
-    /* Remove default focus outline and add subtle box-shadow */
-    div[data-testid="stChatInput"] textarea:focus {{
-        outline: none !important;
-        box-shadow: 0 0 5px 1px #555;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-    )
     with st.sidebar:
         st.markdown("### 💬 Chat with Rebbe!")
         st.markdown("Ask anything about Osher — resume, skills, projects, and more.")
@@ -166,7 +145,6 @@ def create_sidebar():
             st.session_state.chat_history = []
         
         user_input = st.chat_input("Ask a question about Osher...")
-        # Inject CSS for the chat input box
 
         if user_input:
             with st.spinner("Rebbe is thinking..."):
