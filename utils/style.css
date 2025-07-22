@@ -125,6 +125,59 @@ a:hover {
   padding: 4px !important;
 }
 
+/* --- Fix st.chat_input alignment and appearance --- */
+.stChatInputContainer {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+textarea[data-testid="stChatInput"] {
+    background-color: #1e1e3f !important;
+    color: #fff !important;
+    border-radius: 8px 0 0 8px !important;
+    border: 2px solid #fff !important;
+    border-right: none !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1rem !important;
+    caret-color: #fff !important;
+    padding: 10px !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    min-height: 40px !important;
+    resize: none !important;
+}
+
+button[data-testid="stChatInput-sendButton"] {
+    background-color: #1e1e3f !important;
+    color: #fff !important;
+    border-radius: 0 8px 8px 0 !important;
+    border: 2px solid #fff !important;
+    border-left: none !important;
+    font-size: 1.2rem !important;
+    padding: 0 16px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: background 0.2s;
+}
+
+button[data-testid="stChatInput-sendButton"]:hover {
+    background-color: #343A40 !important;
+}
+
+/* Remove extra margin/padding around chat input */
+.stChatInputContainer > div {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* === Force Horizontal Rule (st.markdown('---')) to consistent color === */
 hr {
   border: none;
