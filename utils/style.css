@@ -168,3 +168,21 @@ div[data-baseweb="menu"] div[role="option"]:hover {
   border: 2px solid white !important;
   border-radius: 6px !important;
 }
+
+/* === Chat Input Styling === */
+textarea[data-testid="stChatInput"] {
+    background-color: #1e1e3f !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    border: 2px solid #fff !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1rem !important;
+    caret-color: #fff !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+}
+
+textarea[data-testid="stChatInput"]::placeholder {
+    color: #fff !important;
+    opacity: 0.7;
+}
