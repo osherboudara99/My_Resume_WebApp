@@ -119,15 +119,27 @@ def retrieve_and_answer(query):
 def create_sidebar():
     st.markdown(
         """
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style>
-        /* Hide the span that incorrectly renders Material Icon text */
-        [data-testid="stIconMaterial"] {
-            display: none !important;
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
     
 
     with st.sidebar:
