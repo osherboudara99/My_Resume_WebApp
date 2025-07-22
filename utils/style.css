@@ -135,26 +135,26 @@ hr {
 
 /* === Selectbox Styling === */
 div[data-baseweb="select"] > div {
-  background-color: #1e1e3f !important;
-  color: white !important;
-  border-radius: 6px !important;
-  font-family: 'Roboto', sans-serif !important;
+    background-color: #1e1e3f !important;
+    color: white !important;
+    border-radius: 6px !important;
+    border: 2px solid #fff !important;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 /* === Dropdown Menu Text & Background === */
 div[data-baseweb="menu"] {
-  background-color: #1e1e3f !important;
-  color: white !important;
+    background-color: #1e1e3f !important;
+    color: white !important;
+    border: 2px solid #fff !important;
 }
-
 div[data-baseweb="menu"] div[role="option"] {
-  color: white !important;
-  background-color: #1e1e3f !important;
+    color: white !important;
+    background-color: #1e1e3f !important;
 }
-
 div[data-baseweb="menu"] div[role="option"]:hover {
-  background-color: #28A745 !important;
-  color: white !important;
+    background-color: #28A745 !important;
+    color: white !important;
 }
 
 /* === Chat Input Container === */
@@ -203,7 +203,7 @@ div[data-baseweb="select"]:hover {
 }
 
 /* Hide stray accessibility labels sometimes rendered by Streamlit */
-[aria-label="keyboard"], [aria-live="polite"], div:contains("keyboard") {
+[aria-label="keyboard"], [aria-live="polite"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -213,15 +213,17 @@ div[data-baseweb="select"]:hover {
     z-index: -9999 !important;
 }
 
-/* Chat input background and text color */
+/* Chat input box styling */
 textarea[data-testid="stChatInput"], div[data-testid="stChatInput"] textarea, input[data-testid="stChatInput"] {
     background-color: #1e1e3f !important;
     color: #fff !important;
     border-radius: 8px !important;
-    border: 2px solid #343A40 !important;
+    border: 2px solid #fff !important;
     font-family: 'Roboto', sans-serif !important;
     font-size: 1rem !important;
     caret-color: white !important;
+    padding: 10px !important;
+    box-shadow: none !important;
 }
 textarea[data-testid="stChatInput"]::placeholder,
 div[data-testid="stChatInput"] textarea::placeholder,
@@ -233,5 +235,11 @@ input[data-testid="stChatInput"]::placeholder {
 /* Force selectbox and radio text to white */
 div[data-baseweb="select"], div[data-baseweb="select"] *, label, .stRadio label, .stSelectbox label, div[role="radiogroup"] label {
     color: #fff !important;
+}
+
+/* Radio button text color */
+div[role="radiogroup"] label {
+    color: white !important;
+    font-weight: bold !important;
 }
 
