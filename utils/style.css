@@ -124,7 +124,7 @@ html, body, [data-testid="stApp"] {
 
 /* === Selectbox Styling === */
 div[data-baseweb="select"] > div {
-  background-color: #007BFF !important;
+  background-color: #1e1e3f !important;
   color: #fff !important;
   border-radius: 6px !important;
   border: 1px solid #fff !important;
@@ -189,11 +189,17 @@ textarea[data-testid="stChatInput"]::placeholder {
     opacity: 0.7;
 }
 
-label, .stRadio label, .stSelectbox label,
+/* --- Make radio options (Descending, Ascending) white --- */
 div[data-baseweb="radio"] label,
 div[data-baseweb="radio"] div[role="radio"],
 div[role="radiogroup"] label,
 div[data-baseweb="radio"] span {
     color: #fff !important;
     font-weight: 500 !important;
+}
+
+/* --- Make every st.expander have a thin white border --- */
+[data-testid="stExpander"] {
+    border: 1px solid #fff !important;
+    border-radius: 8px !important;
 }
