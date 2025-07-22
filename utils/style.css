@@ -135,7 +135,7 @@ hr {
 
 /* === Selectbox Styling === */
 div[data-baseweb="select"] > div {
-  background-color: #343A40 !important;
+  background-color: #1e1e3f !important;
   color: white !important;
   border-radius: 6px !important;
   font-family: 'Roboto', sans-serif !important;
@@ -143,13 +143,13 @@ div[data-baseweb="select"] > div {
 
 /* === Dropdown Menu Text & Background === */
 div[data-baseweb="menu"] {
-  background-color: #343A40 !important;
+  background-color: #1e1e3f !important;
   color: white !important;
 }
 
 div[data-baseweb="menu"] div[role="option"] {
   color: white !important;
-  background-color: #343A40 !important;
+  background-color: #1e1e3f !important;
 }
 
 div[data-baseweb="menu"] div[role="option"]:hover {

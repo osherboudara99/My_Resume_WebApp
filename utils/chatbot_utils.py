@@ -117,6 +117,47 @@ def retrieve_and_answer(query):
 
 
 def create_sidebar():
+    st.markdown(
+    """
+    <style>
+    /* Hide the tooltip text on sidebar collapse/expand button */
+    button[title] {
+        pointer-events: none;  /* disable hover events */
+    }
+    button[title]:hover::after {
+        content: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+    )
+
+    st.markdown(
+    f"""
+    <style>
+    /* Style chat input container */
+    div[data-testid="stChatInput"] textarea {{
+        background-color: #1e1e3f !important;
+        color: white !important;
+        border: 1px solid #444;  /* optional: subtle border */
+        font-size: 16px;          /* optional: adjust font size */
+    }}
+
+    /* Style the placeholder text */
+    div[data-testid="stChatInput"] textarea::placeholder {{
+        color: #bbb;              /* lighter placeholder */
+        opacity: 1;
+    }}
+
+    /* Remove default focus outline and add subtle box-shadow */
+    div[data-testid="stChatInput"] textarea:focus {{
+        outline: none !important;
+        box-shadow: 0 0 5px 1px #555;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+    )
     with st.sidebar:
         st.markdown("### 💬 Chat with Rebbe!")
         st.markdown("Ask anything about Osher — resume, skills, projects, and more.")
@@ -125,29 +166,8 @@ def create_sidebar():
             st.session_state.chat_history = []
         
         user_input = st.chat_input("Ask a question about Osher...")
-        st.markdown("""
-            <style>
-            /* (your existing CSS here) */
+        # Inject CSS for the chat input box
 
-            /* === Chat Input Fix === */
-            form[data-testid="stChatInput"] input {
-                background-color: #1e1e3f !important;
-                color: white !important;
-                border: 2px solid #343A40 !important;
-                border-radius: 8px !important;
-                padding: 0.6rem 1rem !important;
-                font-family: 'Roboto', sans-serif !important;
-                font-size: 1rem !important;
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            }
-
-            form[data-testid="stChatInput"] input:focus {
-                border-color: #000000 !important;
-                box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
-                outline: none !important;
-            }
-            </style>
-        """, unsafe_allow_html=True)
         if user_input:
             with st.spinner("Rebbe is thinking..."):
                 answer = retrieve_and_answer(user_input)
