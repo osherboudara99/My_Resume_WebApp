@@ -9,6 +9,15 @@ import streamlit.components.v1 as components
 
 st.set_page_config(layout='wide', page_title='Home', page_icon=":house:")
 
+st.markdown("""
+<style>
+/* Hide rogue material icon text in sidebar */
+span[aria-hidden="true"] {
+    color: transparent !important;
+    font-size: 0 !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 import utils.backend_utils as backend, utils.frontend_utils as frontend, utils.chatbot_utils as chatbot
 import time
