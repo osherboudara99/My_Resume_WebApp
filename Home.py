@@ -33,29 +33,7 @@ span[aria-hidden="true"], .sidebar-content span, .sidebar-content svg {
 """, unsafe_allow_html=True)
 
 
-st.markdown("""
-    <style>
-    /* Make all radio option text white */
-    div[data-baseweb="radio"] > div > div {
-        color: white !important;
-    }
 
-    /* Also target the inner span text inside radio buttons */
-    div[data-baseweb="radio"] span {
-        color: white !important;
-    }
-
-    /* Optional: change hover/focus color */
-    div[data-baseweb="radio"] div:hover {
-        color: white !important;
-    }
-
-    /* Make radio label (e.g., "Order:") white */
-    div.stRadio label {
-        color: white !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 import utils.backend_utils as backend, utils.frontend_utils as frontend, utils.chatbot_utils as chatbot
 import time
