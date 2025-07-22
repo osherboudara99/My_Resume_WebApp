@@ -117,19 +117,18 @@ a:hover {
     color: white;
 }
 
-/* === Chat Input Field Styling (fix for st.chat_input) === */
-div[data-testid="stChatInput"] input[data-baseweb="input"] {
+form[data-testid="stChatInput"] input {
     background-color: #1e1e3f !important;
     color: white !important;
     border: 2px solid #343A40 !important;
     border-radius: 8px !important;
-    padding: 0.5rem 1rem !important;
+    padding: 0.6rem 1rem !important;
     font-family: 'Roboto', sans-serif !important;
     font-size: 1rem !important;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-div[data-testid="stChatInput"] input[data-baseweb="input"]:focus {
+form[data-testid="stChatInput"] input:focus {
     border-color: #000000 !important;
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
     outline: none !important;
@@ -137,7 +136,7 @@ div[data-testid="stChatInput"] input[data-baseweb="input"]:focus {
 
 /* === Selectbox Styling === */
 div[data-baseweb="select"] {
-    background-color: #343A40 !important;
+    background-color: #1e1e3f !important;
     color: white !important;
     border-radius: 6px !important;
     font-family: 'Roboto', sans-serif !important;
@@ -145,11 +144,11 @@ div[data-baseweb="select"] {
 
 div[data-baseweb="select"] * {
     color: white !important;
-    background-color: #343A40 !important;
+    background-color: #1e1e3f !important;
     font-weight: 500 !important;
 }
 
 div[data-baseweb="select"]:hover {
-    border-color: #28A745 !important;
+    border-color: #000000 !important;
 }
 
