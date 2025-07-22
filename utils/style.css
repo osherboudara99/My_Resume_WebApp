@@ -54,7 +54,7 @@
 
 /* === Button Styling === */
 [data-testid="stButton"] button {
-    background-color: #FFC107;
+    background-color: #1e1e3f;
     color: white;
     border-radius: 6px;
     padding: 0.5rem 1rem;
@@ -93,7 +93,7 @@ a:hover {
 
 /* === Download Button Styling === */
 .stDownloadButton button {
-    background-color: #FFC107; /* Match main button color */
+    background-color: #1e1e3f; /* Match main button color */
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -103,6 +103,6 @@ a:hover {
 }
 
 .stDownloadButton button:hover {
-    background-color: #28A745; /* Green on hover */
+    background-color: #1e1e3f; /* Green on hover */
     color: white;
 }
