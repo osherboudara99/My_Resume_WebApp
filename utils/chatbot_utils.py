@@ -123,6 +123,8 @@ def create_sidebar():
 
         if "chat_history" not in st.session_state:
             st.session_state.chat_history = []
+        
+        user_input = st.chat_input("Ask a question about Osher...")
         st.markdown("""
             <style>
             /* (your existing CSS here) */
@@ -146,7 +148,6 @@ def create_sidebar():
             }
             </style>
         """, unsafe_allow_html=True)
-        user_input = st.chat_input("Ask a question about Osher...")
         if user_input:
             with st.spinner("Rebbe is thinking..."):
                 answer = retrieve_and_answer(user_input)
