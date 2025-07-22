@@ -41,6 +41,31 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
 
 def create_repo_sort(repos):
 
+    st.markdown("""
+        <style>
+        /* Make all selectbox and radio text white */
+        .stSelectbox > div, .stRadio > div {
+            color: white !important;
+        }
+        
+        /* Style the labels */
+        label, .stSelectbox label, .stRadio label {
+            color: white !important;
+        }
+
+        /* Style options in select dropdown */
+        div[role="listbox"] > div {
+            color: white !important;
+            background-color: #1e1e1e !important;  /* Optional: dark dropdown background */
+        }
+
+        /* Optional: make radio button selection text white */
+        div[data-baseweb="radio"] label {
+            color: white !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     col1, col2 = st.columns([1, 1])
 
     with col1:
