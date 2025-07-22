@@ -118,6 +118,23 @@ a:hover {
 }
 
 /* --- Fix st.chat_input alignment and appearance --- */
+.stChatInputContainer,
+.stChatInputContainer *,
+textarea[data-testid="stChatInput"],
+input[data-testid="stChatInput"],
+div[data-testid="stChatInput"] textarea,
+div[data-testid="stChatInput"] input {
+    background-color: #1e1e3f !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    border: 2px solid #fff !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1rem !important;
+    caret-color: #fff !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+}
+
 .stChatInputContainer {
     background: none !important;
     border: none !important;
@@ -129,16 +146,8 @@ a:hover {
 }
 
 textarea[data-testid="stChatInput"] {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
     border-radius: 8px 0 0 8px !important;
-    border: 2px solid #fff !important;
     border-right: none !important;
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 1rem !important;
-    caret-color: #fff !important;
-    padding: 10px !important;
-    box-shadow: none !important;
     width: 100% !important;
     min-height: 40px !important;
     height: 40px !important;
@@ -221,6 +230,8 @@ div[data-baseweb="menu"] div[role="option"]:hover {
 }
 
 /* === Radio Styling === */
+div[data-baseweb="radio"] *,
+div[role="radiogroup"] *,
 div[data-baseweb="radio"] label,
 div[data-baseweb="radio"] div[role="radio"],
 div[role="radiogroup"] label,
@@ -231,7 +242,11 @@ div[data-baseweb="radio"] span {
 }
 
 /* === Hide stray accessibility labels sometimes rendered by Streamlit === */
-[aria-label="keyboard"], [aria-live="polite"], div:has([aria-label="keyboard"]) {
+body > div[aria-label="keyboard"],
+body > div[aria-live="polite"],
+[aria-label="keyboard"],
+[aria-live="polite"],
+div:has([aria-label="keyboard"]) {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
