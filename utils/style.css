@@ -117,14 +117,6 @@ a:hover {
     color: white;
 }
 
-/* === Chat Input Container Styles === */
-.stChatInputContainer {
-  background-color: #1e1e3f !important;
-  border: 2px solid #343A40 !important;
-  border-radius: 8px !important;
-  padding: 4px !important;
-}
-
 /* --- Fix st.chat_input alignment and appearance --- */
 .stChatInputContainer {
     background: none !important;
@@ -149,7 +141,9 @@ textarea[data-testid="stChatInput"] {
     box-shadow: none !important;
     width: 100% !important;
     min-height: 40px !important;
+    height: 40px !important;
     resize: none !important;
+    margin: 0 !important;
 }
 
 button[data-testid="stChatInput-sendButton"] {
@@ -166,6 +160,7 @@ button[data-testid="stChatInput-sendButton"] {
     justify-content: center !important;
     cursor: pointer !important;
     transition: background 0.2s;
+    margin: 0 !important;
 }
 
 button[data-testid="stChatInput-sendButton"]:hover {
@@ -194,6 +189,20 @@ div[data-baseweb="select"] > div {
     border: 2px solid #fff !important;
     font-family: 'Roboto', sans-serif !important;
 }
+div[data-baseweb="select"] {
+    background-color: #1e1e3f !important;
+    color: white !important;
+    border-radius: 6px !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+div[data-baseweb="select"] * {
+    color: white !important;
+    background-color: #1e1e3f !important;
+    font-weight: 500 !important;
+}
+div[data-baseweb="select"]:hover {
+    border-color: #fff !important;
+}
 
 /* === Dropdown Menu Text & Background === */
 div[data-baseweb="menu"] {
@@ -211,72 +220,14 @@ div[data-baseweb="menu"] div[role="option"]:hover {
     color: #fff !important;
 }
 
-/* === Chat Input Container === */
-.stChatInputContainer,
-textarea[data-testid="stChatInput"],
-div[data-testid="stChatInput"] textarea,
-input[data-testid="stChatInput"] {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
-    border-radius: 8px !important;
-    border: 2px solid #fff !important;
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 1rem !important;
-    caret-color: #fff !important;
-    padding: 10px !important;
-    box-shadow: none !important;
-}
-
-/* === Chat Input Field === */
-.stChatInputContainer input[type="text"] {
-    background-color: transparent !important;
-    color: #fff !important;
-    border: none !important;
-    outline: none !important;
-    width: 100% !important;
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 1rem !important;
-    caret-color: #fff !important;
-}
-
-/* === Chat Input Placeholder === */
-textarea[data-testid="stChatInput"]::placeholder,
-div[data-testid="stChatInput"] textarea::placeholder,
-input[data-testid="stChatInput"]::placeholder {
-    color: #fff !important;
-    opacity: 0.7;
-}
-
-/* === Chat Input Focus Effect === */
-.stChatInputContainer input[type="text"]:focus {
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
-}
-
-/* === Selectbox Styling === */
-div[data-baseweb="select"] {
-    background-color: #1e1e3f !important;
-    color: white !important;
-    border-radius: 6px !important;
-    font-family: 'Roboto', sans-serif !important;
-}
-
-div[data-baseweb="select"] * {
-    color: white !important;
-    background-color: #1e1e3f !important;
-    font-weight: 500 !important;
-}
-
-div[data-baseweb="select"]:hover {
-    border-color: #fff !important;
-}
-
 /* === Radio Styling === */
 div[data-baseweb="radio"] label,
 div[data-baseweb="radio"] div[role="radio"],
-div[role="radiogroup"] label {
-    color: #fff !important;
-    background: transparent !important;
-    font-weight: bold !important;
+div[role="radiogroup"] label,
+div[data-baseweb="radio"] span {
+  color: #fff !important;
+  background: transparent !important;
+  font-weight: bold !important;
 }
 
 /* === Hide stray accessibility labels sometimes rendered by Streamlit === */
