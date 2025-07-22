@@ -28,17 +28,17 @@
 }
 
 [data-testid="stHeader"] {
-    background-color: #1e1e3f !important; /* Change to your desired background color */
-    color: white !important; /* Change to your desired text color */
-    font-family: 'Roboto', sans-serif; /* Optional: Set a custom font */
-    padding: 1rem; /* Optional: Add padding */
-    text-align: center; /* Optional: Center-align the text */
+    background-color: #1e1e3f !important;
+    color: white !important;
+    font-family: 'Roboto', sans-serif;
+    padding: 1rem;
+    text-align: center;
 }
 
 /* === Sidebar Styling === */
 [data-testid="stSidebar"] {
-    background-color: #1e1e3f !important; /* Dark sidebar background */
-    color: white !important; /* White text */
+    background-color: #1e1e3f !important;
+    color: white !important;
 }
 
 [data-testid="stSidebar"] * {
@@ -47,25 +47,15 @@
 }
 
 [data-testid="stSidebar"] select {
-    background-color: #343A40 !important; /* Darker dropdown background */
+    background-color: #343A40 !important;
     color: white !important;
     font-weight: bold !important;
 }
 
-/* === Header Styling ===
-.custom-header {
-    background-color: #007BFF;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-} */
-
 /* === Button Styling === */
 [data-testid="stButton"] button {
-    background-color: #FFC107; /* Amber Yellow */
-    color: white; /* Dark Gray */
+    background-color: #FFC107;
+    color: white;
     border-radius: 6px;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease;
@@ -73,7 +63,7 @@
 }
 
 [data-testid="stButton"] button:hover {
-    background-color: #28A745; /* Green */
+    background-color: #28A745;
     color: white;
 }
 
@@ -85,7 +75,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: 2rem auto;
-    color: white; /* Dark text */
+    color: white;
     font-size: 16px;
     line-height: 1.6;
 }
@@ -99,4 +89,20 @@ a {
 a:hover {
     color: #28A745;
     text-decoration: underline;
+}
+
+/* === Download Button Styling === */
+.stDownloadButton button {
+    background-color: #FFC107; /* Match main button color */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.stDownloadButton button:hover {
+    background-color: #28A745; /* Green on hover */
+    color: white;
 }
