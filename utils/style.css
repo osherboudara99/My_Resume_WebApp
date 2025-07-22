@@ -145,3 +145,26 @@ div[data-baseweb="menu"] div[role="option"]:hover {
   background-color: #28A745 !important;
   color: white !important;
 }
+
+
+/* === Download Button Styling === */
+.stDownloadButton button {
+  background-color: #1e1e3f !important;
+  color: white !important;
+  border: 2px solid white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: background-color 0.3s ease;
+}
+
+.stDownloadButton button:hover {
+  background-color: #000000 !important;
+  color: white !important;
+}
+
+/* === streamlit-pdf-viewer border === */
+.streamlit-pdf-viewer iframe {
+  border: 2px solid white !important;
+  border-radius: 6px !important;
+}
