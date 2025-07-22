@@ -106,3 +106,42 @@ a:hover {
     background-color: #1e1e3f; /* Green on hover */
     color: white;
 }
+
+/* === Force Horizontal Rule (st.markdown('---')) to consistent color === */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ffffff33 !important; /* semi-transparent white line */
+  margin: 1.5rem 0;
+}
+
+/* === Consistent App Background & Text Colors === */
+html, body, [data-testid="stApp"] {
+  background-color: #1e1e3f !important;
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* === Selectbox Styling === */
+div[data-baseweb="select"] > div {
+  background-color: #343A40 !important;
+  color: white !important;
+  border-radius: 6px !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* === Dropdown Menu Text & Background === */
+div[data-baseweb="menu"] {
+  background-color: #343A40 !important;
+  color: white !important;
+}
+
+div[data-baseweb="menu"] div[role="option"] {
+  color: white !important;
+  background-color: #343A40 !important;
+}
+
+div[data-baseweb="menu"] div[role="option"]:hover {
+  background-color: #28A745 !important;
+  color: white !important;
+}
