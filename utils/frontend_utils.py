@@ -35,22 +35,6 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
             st.download_button(f"Download {cert_name_display}", data=backend.pdf_reader(cert_path), file_name=cert_name, mime='application/pdf')
 
 def create_repo_sort(repos):
-    # Ensure sort controls use white text
-    st.markdown("""
-        <style>
-        /* Selectbox and radio text color */
-        div[data-baseweb="select"], div[data-baseweb="select"] * {
-            color: white !important;
-        }
-        label, .stRadio label, .stSelectbox label {
-            color: white !important;
-        }
-        /* Radio button text */
-        div[role="radiogroup"] label {
-            color: white !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns([1, 1])
 

@@ -117,25 +117,7 @@ def retrieve_and_answer(query):
 
 
 def create_sidebar():
-    # Inject CSS for chat input styling
-    st.markdown("""
-        <style>
-        /* Chat input background and text color */
-        textarea[data-testid="stChatInput"] {
-            background-color: #1e1e3f !important;
-            color: #fff !important;
-            border-radius: 8px !important;
-            border: 2px solid #343A40 !important;
-            font-family: 'Roboto', sans-serif !important;
-            font-size: 1rem !important;
-            caret-color: white !important;
-        }
-        textarea[data-testid="stChatInput"]::placeholder {
-            color: #fff !important;
-            opacity: 0.7;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    
 
     with st.sidebar:
         st.markdown("### 💬 Chat with Rebbe!")
