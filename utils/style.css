@@ -203,3 +203,19 @@ div[data-baseweb="radio"] span {
     border: 1px solid #fff !important;
     border-radius: 8px !important;
 }
+
+/* Hide rogue 'keyboard_double_arrow_left' text */
+.block-container:has(.sidebar) > div:first-child:has(span[aria-hidden="true"]) {
+    display: none !important;
+}
+
+/* Alternatively, hide any span that wrongly shows material icon text */
+span[aria-hidden="true"]:has-text("keyboard_double_arrow_left") {
+    display: none !important;
+}
+
+/* Catch-all fallback: hide all raw material icon text */
+span[aria-hidden="true"] {
+    font-family: 'Material Icons';
+    speak: none;
+}
