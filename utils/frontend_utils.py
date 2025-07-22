@@ -29,7 +29,7 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
     with st.container():
         with st.expander(f'View {cert_name_display} PDF'):
             width = "100%"
-            if cert_name == 'Osher_B_AZ900_cert_rotated.pdf':
+            if cert_name == 'Osher_B_Database_Tech_USDL_cert.pdf':
                 width = 700
             
         
