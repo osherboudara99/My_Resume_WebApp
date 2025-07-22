@@ -125,22 +125,70 @@ a:hover {
   padding: 4px !important;
 }
 
-/* === Chat Input Field (nested input[type="text"]) === */
+/* === Force Horizontal Rule (st.markdown('---')) to consistent color === */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ffffff33 !important; /* semi-transparent white line */
+  margin: 1.5rem 0;
+}
+
+/* === Consistent App Background & Text Colors === */
+html, body, [data-testid="stApp"] {
+  background-color: #1e1e3f !important;
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* === Selectbox Styling === */
+div[data-baseweb="select"] > div {
+  background-color: #343A40 !important;
+  color: white !important;
+  border-radius: 6px !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* === Dropdown Menu Text & Background === */
+div[data-baseweb="menu"] {
+  background-color: #343A40 !important;
+  color: white !important;
+}
+
+div[data-baseweb="menu"] div[role="option"] {
+  color: white !important;
+  background-color: #343A40 !important;
+}
+
+div[data-baseweb="menu"] div[role="option"]:hover {
+  background-color: #28A745 !important;
+  color: white !important;
+}
+
+/* === Chat Input Container === */
+.stChatInputContainer {
+  background-color: #1e1e3f !important;
+  border: 2px solid #343A40 !important;
+  border-radius: 8px !important;
+  padding: 6px !important;
+}
+
+/* === Chat Input Field === */
 .stChatInputContainer input[type="text"] {
   background-color: transparent !important;
   color: white !important;
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1rem !important;
   border: none !important;
   outline: none !important;
   width: 100% !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1rem !important;
   caret-color: white !important;
 }
 
-/* === Chat Input Field Focus State === */
+/* === Chat Input Focus Effect === */
 .stChatInputContainer input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
 }
+
 
 
 /* === Selectbox Styling === */
