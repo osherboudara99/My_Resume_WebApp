@@ -64,7 +64,7 @@
 
 /* === Button Styling === */
 [data-testid="stButton"] button {
-    background-color: #1e1e3f; /* Amber Yellow */
+    background-color: #FFC107; /* Amber Yellow */
     color: white; /* Dark Gray */
     border-radius: 6px;
     padding: 0.5rem 1rem;
@@ -73,7 +73,7 @@
 }
 
 [data-testid="stButton"] button:hover {
-    background-color: #000000; /* Green */
+    background-color: #28A745; /* Green */
     color: white;
 }
 
@@ -100,159 +100,3 @@ a:hover {
     color: #28A745;
     text-decoration: underline;
 }
-
-/* === Download Button Styling === */
-.stDownloadButton button {
-    background-color: #1e1e3f; /* Match main button color */
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.stDownloadButton button:hover {
-    background-color: #000000; /* Green on hover */
-    color: white;
-}
-
-/* --- Fix st.chat_input alignment and appearance --- */
-.stChatInputContainer,
-.stChatInputContainer *,
-textarea[data-testid="stChatInput"],
-input[data-testid="stChatInput"],
-div[data-testid="stChatInput"] textarea,
-div[data-testid="stChatInput"] input {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
-    border-radius: 8px !important;
-    border: 2px solid #fff !important;
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 1rem !important;
-    caret-color: #fff !important;
-    box-shadow: none !important;
-    padding: 10px !important;
-}
-
-.stChatInputContainer {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-textarea[data-testid="stChatInput"] {
-    border-radius: 8px 0 0 8px !important;
-    border-right: none !important;
-    width: 100% !important;
-    min-height: 40px !important;
-    height: 40px !important;
-    resize: none !important;
-    margin: 0 !important;
-}
-
-button[data-testid="stChatInput-sendButton"] {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
-    border-radius: 0 8px 8px 0 !important;
-    border: 2px solid #fff !important;
-    border-left: none !important;
-    font-size: 1.2rem !important;
-    padding: 0 16px !important;
-    height: 40px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: background 0.2s;
-    margin: 0 !important;
-}
-
-button[data-testid="stChatInput-sendButton"]:hover {
-    background-color: #343A40 !important;
-}
-
-/* Remove extra margin/padding around chat input */
-.stChatInputContainer > div {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* === Force Horizontal Rule (st.markdown('---')) to consistent color === */
-hr {
-  border: none;
-  height: 1px;
-  background-color: #ffffff33 !important; /* semi-transparent white line */
-  margin: 1.5rem 0;
-}
-
-/* === Selectbox Styling === */
-div[data-baseweb="select"] > div {
-    background-color: #1e1e3f !important;
-    color: white !important;
-    border-radius: 6px !important;
-    border: 2px solid #fff !important;
-    font-family: 'Roboto', sans-serif !important;
-}
-div[data-baseweb="select"] {
-    background-color: #1e1e3f !important;
-    color: white !important;
-    border-radius: 6px !important;
-    font-family: 'Roboto', sans-serif !important;
-}
-div[data-baseweb="select"] * {
-    color: white !important;
-    background-color: #1e1e3f !important;
-    font-weight: 500 !important;
-}
-div[data-baseweb="select"]:hover {
-    border-color: #fff !important;
-}
-
-/* === Dropdown Menu Text & Background === */
-div[data-baseweb="menu"] {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-div[data-baseweb="menu"] div[role="option"] {
-    background-color: #1e1e3f !important;
-    color: #fff !important;
-    font-weight: 500 !important;
-}
-div[data-baseweb="menu"] div[role="option"]:hover {
-    background-color: #343A40 !important;
-    color: #fff !important;
-}
-
-/* === Radio Styling === */
-div[data-baseweb="radio"] *,
-div[role="radiogroup"] *,
-div[data-baseweb="radio"] label,
-div[data-baseweb="radio"] div[role="radio"],
-div[role="radiogroup"] label,
-div[data-baseweb="radio"] span {
-  color: #fff !important;
-  background: transparent !important;
-  font-weight: bold !important;
-}
-
-/* === Hide stray accessibility labels sometimes rendered by Streamlit === */
-body > div[aria-label="keyboard"],
-body > div[aria-live="polite"],
-[aria-label="keyboard"],
-[aria-live="polite"],
-div:has([aria-label="keyboard"]) {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-}
-
