@@ -117,30 +117,28 @@ def retrieve_and_answer(query):
 
 
 def create_sidebar():
+
     st.markdown(
         """
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style>
-        .material-icons {
-            font-family: 'Material Icons';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            direction: ltr;
-            -webkit-font-feature-settings: 'liga';
-            -webkit-font-smoothing: antialiased;
-        }
-        </style>
+        <head>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <style>
+                [data-testid="stIconMaterial"] {
+                    font-family: 'Material Icons' !important;
+                    font-style: normal;
+                    font-weight: normal;
+                    letter-spacing: normal;
+                    text-transform: none;
+                    white-space: nowrap;
+                    direction: ltr;
+                    -webkit-font-feature-settings: 'liga';
+                    -webkit-font-smoothing: antialiased;
+                }
+            </style>
+        </head>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
-
-    
 
     with st.sidebar:
         st.markdown("### 💬 Chat with Rebbe!")
