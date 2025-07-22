@@ -117,6 +117,17 @@ def retrieve_and_answer(query):
 
 
 def create_sidebar():
+    st.markdown(
+        """
+        <style>
+        /* Hide the span that incorrectly renders Material Icon text */
+        [data-testid="stIconMaterial"] {
+            display: none !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     
 
     with st.sidebar:
