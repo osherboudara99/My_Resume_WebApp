@@ -117,18 +117,31 @@ a:hover {
     color: white;
 }
 
-/* === Chat Input Container Background === */
-.stChatInputContainer > div {
+/* === Chat Input Container Styles === */
+.stChatInputContainer {
   background-color: #1e1e3f !important;
   border: 2px solid #343A40 !important;
   border-radius: 8px !important;
+  padding: 4px !important;
 }
 
-/* === Chat Input Text & Caret Color === */
-[data-testid="stChatInput"] {
+/* === Chat Input Field (nested input[type="text"]) === */
+.stChatInputContainer input[type="text"] {
+  background-color: transparent !important;
   color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1rem !important;
+  border: none !important;
+  outline: none !important;
+  width: 100% !important;
   caret-color: white !important;
 }
+
+/* === Chat Input Field Focus State === */
+.stChatInputContainer input[type="text"]:focus {
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
+}
+
 
 /* === Selectbox Styling === */
 div[data-baseweb="select"] {
