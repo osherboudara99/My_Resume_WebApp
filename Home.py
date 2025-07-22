@@ -11,10 +11,23 @@ st.set_page_config(layout='wide', page_title='Home', page_icon=":house:")
 
 st.markdown("""
 <style>
-/* Hide rogue material icon text in sidebar */
-span[aria-hidden="true"] {
+/* Hide rogue material icon text and sidebar icons */
+span[aria-hidden="true"], .sidebar-content span, .sidebar-content svg {
     color: transparent !important;
     font-size: 0 !important;
+    fill: transparent !important;
+    visibility: hidden !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+[data-testid="stSidebarNav"] span, [data-testid="stSidebarNav"] svg {
+    color: transparent !important;
+    fill: transparent !important;
+    visibility: hidden !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 </style>
 """, unsafe_allow_html=True)
