@@ -133,13 +133,6 @@ hr {
   margin: 1.5rem 0;
 }
 
-/* === Consistent App Background & Text Colors === */
-html, body, [data-testid="stApp"] {
-  background-color: #1e1e3f !important;
-  color: white !important;
-  font-family: 'Roboto', sans-serif !important;
-}
-
 /* === Selectbox Styling === */
 div[data-baseweb="select"] > div {
   background-color: #343A40 !important;

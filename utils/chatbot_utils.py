@@ -123,7 +123,29 @@ def create_sidebar():
 
         if "chat_history" not in st.session_state:
             st.session_state.chat_history = []
+        st.markdown("""
+            <style>
+            /* (your existing CSS here) */
 
+            /* === Chat Input Fix === */
+            form[data-testid="stChatInput"] input {
+                background-color: #1e1e3f !important;
+                color: white !important;
+                border: 2px solid #343A40 !important;
+                border-radius: 8px !important;
+                padding: 0.6rem 1rem !important;
+                font-family: 'Roboto', sans-serif !important;
+                font-size: 1rem !important;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            form[data-testid="stChatInput"] input:focus {
+                border-color: #000000 !important;
+                box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3) !important;
+                outline: none !important;
+            }
+            </style>
+        """, unsafe_allow_html=True)
         user_input = st.chat_input("Ask a question about Osher...")
         if user_input:
             with st.spinner("Rebbe is thinking..."):
