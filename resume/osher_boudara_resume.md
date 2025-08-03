@@ -35,7 +35,7 @@
 ## **SKILLS**
 
 * Programming/Technical Skills: Python, SQL, AWS, GCP, Git/Github  
-* Spoken Languages: English (Native), Hebrew (Native)  
+* Spoken Languages: English, Hebrew   
 * Certifications: AWS CCP, Microsoft: AZ-900, ML Specialization (U. of Wash.), Database Technician (US Dept. of Labor) 
 
 ## **EDUCATION**
