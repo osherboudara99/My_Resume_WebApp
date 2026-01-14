@@ -98,6 +98,30 @@ def retrieve_and_answer(query):
 
     try:
         answer = call_openai(prompt, max_tokens=150)
+        # If the model returns an incomplete list (e.g., ends with ':' or 'the following projects'), retry with explicit instruction and higher token limit
+        def is_truncated_list(text):
+            t = (text or "").strip().lower()
+            if not t:
+                return True
+            if t.endswith(':') or re.search(r'following (projects|items|work):?$', t):
+                return True
+            # very short answers that reference projects but don't list them
+            if len(t) < 40 and ('project' in t or 'projects' in t):
+                return True
+            return False
+
+        if is_truncated_list(answer):
+            followup_prompt = prompt + (
+                "\n\nPlease list ALL projects mentioned in the Context as a numbered list. "
+                "If there are none, reply 'No projects found in context.' Use only information in the context and do not make up any projects."
+            )
+            try:
+                followup = call_openai(followup_prompt, max_tokens=400)
+                if followup and not followup.lower().startswith("i'm sorry"):
+                    answer = followup
+            except Exception:
+                pass
+
         # Remove lines starting with dashes or section headers
         cleaned_lines = []
         for line in answer.split('\n'):
