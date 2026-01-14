@@ -103,8 +103,11 @@ def retrieve_and_answer(query):
         for line in answer.split('\n'):
             if line.strip() and not line.strip().startswith("-") and not re.match(r"^[#\u25A0\u25CF]", line.strip()):
                 cleaned_lines.append(line.strip())
-        answer = " ".join(cleaned_lines)
-        answer = answer.split(".")[0].strip() + "."
+        # Preserve multi-line structure so lists aren't truncated, but keep responses concise
+        answer = "\n".join(cleaned_lines).strip()
+        # Cap very long responses to keep brevity
+        if len(answer) > 1000:
+            answer = answer[:1000].rsplit(' ', 1)[0] + "..."
         forbidden_entities = [
             "florida department of agriculture", "chief data officer", "mit", "berkeley", "brown university"
         ]
