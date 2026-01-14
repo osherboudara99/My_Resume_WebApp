@@ -1,79 +1,100 @@
 ### 💼 Professional Experience
 
-**Cognizant** — Senior Associate Data Scientist (May 2025 – Present)
-- Promoted in recognition of technical excellence and project leadership
-- Continue leading end-to-end data science projects for Fortune 500 crop science client
-- Implement comprehensive data science lifecycle including:
-  - Project scoping and stakeholder management
-  - Data ingestion and ETL automation
-  - Data warehouse management
-  - MLOps and cloud infrastructure (AWS/GCP)
-  - Version control and visualization
+**Cognizant** — Senior Associate Data Scientist (August 2022 – Present)
 
-**Cognizant** — Associate Data Scientist (Aug 2022 – May 2025)
-- Developed Climate Change Impact and Adaptation Tool:
-  - Built customizable crop modeling framework using ETL pipelines and MLOps
-  - Simulates crop growing cycles under climate change scenarios through 2100
-  - Provides insights on crop yields, environmental conditions, and agro-management
-  - Helps maintain revenue while mitigating climate change risks
-- Delivered patentable Market Share Forecast Tool:
-  - Employs advanced MLOps and data science techniques for predictions, classification and feature extraction
-  - Provides insights into market share shifts and key drivers
+* Promoted in recognition of technical excellence and project leadership
+* Continue leading end-to-end data science projects for Fortune 500 crop science client
+* Implement comprehensive data science lifecycle including:
+
+  * Project scoping and stakeholder management
+  * Data ingestion, ETL pipelines, and data warehouse management
+  * MLOps and cloud infrastructure (AWS/GCP)
+  * Version control, analytics, and visualization
+
+* Developed Climate Change Impact and Adaptation Tool:
+
+  * Built customizable crop lifecycle simulation framework using ETL pipelines and MLOps
+  * Simulates crop growth under climate change scenarios through 2100
+  * Provides insights on yields, environmental conditions, emissions, and agro-management
+  * Supports long-term business strategy and risk mitigation
+* Built Agentic Competitive Intelligence Platform:
+
+  * Leveraged LLMs and RAG to analyze competitor financials, strategic shifts, and headcount trends
+  * Integrated LangGraph agents with AWS-hosted document retrieval layer
+* Delivered patentable Market Share Forecast Tool:
+
+  * Employs advanced MLOps and data science techniques for predictions, classification, and feature extraction
+  * Provides insights into market share shifts and key drivers
+* Conducted Crop Mega-Environment Analysis across EMEA:
+
+  * Engineered phenological features from GDD calculations
+  * Applied clustering to identify climate-driven shifts; produced geospatial visualizations
+* Constructed Global Ensemble Climate Change Dataset:
+
+  * Integrated multiple projected weather sources; processed with NetCDF, interpolation, and aggregation
+  * Stored raw data in AWS S3 and analytics-ready datasets in BigQuery
 
 **Hoffman Brothers Realty** — Python Developer (Jan 2022 - Dec 2022)
-- Developed automated workflows using AWS services:
-  - Built application import tool processing hundreds of applications weekly
-  - Reduced monthly labor costs by thousands through automation
-  - Utilized Lambda, EventBridge, and S3 for pipeline management
-- Created Python scripts for database operations and analytics:
-  - Implemented CRUD operations for Airtable database
-  - Conducted exploratory data analysis (EDA) to uncover market trends
-  - Enhanced team productivity through automated reporting
+
+* Developed automated workflows using AWS services:
+
+  * Built application import tool processing hundreds of applications weekly
+  * Reduced labor costs through automation
+  * Utilized Lambda, EventBridge, and S3 for pipeline management
+* Created Python scripts for database operations and analytics:
+
+  * Implemented CRUD operations for Airtable database
+  * Conducted exploratory data analysis (EDA) to uncover operational insights
+  * Enhanced team productivity through automated reporting
 
 ---
 
 ### 👤 Personal Background
 
-- Born in San Diego, California; raised in Los Angeles, California.
-- Associate’s Degree in Mathematics from Los Angeles Valley College.
-- B.S. in Computer Science, minor in Statistics, from California State University, Northridge (CSUN).
-- Gap year at Bar Ilan University, Tel Aviv.
-- Currently lives in Cambridge, MA.
+* Born in San Diego, California; raised in Los Angeles, California.
+* Associate’s Degree in Mathematics from Los Angeles Valley College.
+* B.S. in Computer Science, minor in Statistics, from California State University, Northridge (CSUN).
+* Gap year at Bar Ilan University, Tel Aviv.
+* Currently lives in Cambridge, MA.
 
 ---
 
 ### 💻 Key Projects
 
-- **Climate Impact and Adaptation Tool**: [Python, AWS] Simulates global crop growth under climate change scenarios; provides business insights.
-- **Song Popularity Prediction**: [Python, XGBoost, Random Forest] Predicts song popularity using Spotify data and regression models.
-- **Loan Default Prediction**: [Python, Scikit-learn] Compares classification models to predict loan defaults.
-- **RoommateFinderApp**: [React Native, Python] Mobile app for finding roommates.
-- **Resume WebApp**: [Python, Streamlit] Interactive app showcasing resume, certifications, and projects.
-- **JC-Plus**: [Java, C] Programming Language that adds objects and class-based inheritance to C.
+* **Agentic Competitive Intelligence Platform**: [Python, AWS, LangGraph] Analyzes competitor financials, headcount trends, and strategic shifts using LLMs and RAG
+* **Climate Impact and Adaptation Tool**: [Python, AWS] Simulates global crop growth under climate change scenarios; provides business insights
+* **Market Share Forecast Tool**: [Python, MLOps] Patentable predictive tool for market share shifts
+* **Crop Mega-Environment Analysis**: [Python, GDD, Clustering] Identifies climate-driven shifts in crop phenology across EMEA; provides geospatial visualizations
+* **Global Ensemble Climate Change Dataset**: [Python, NetCDF, BigQuery] Integrates multiple projected weather sources into an analytics-ready dataset for modeling and visualization
+* **Song Popularity Prediction**: [Python, XGBoost, Random Forest] Predicts song popularity using Spotify data and regression models
+* **Loan Default Prediction**: [Python, Scikit-learn] Compares classification models to predict loan defaults
+* **RoommateFinderApp**: [React Native, Python] Mobile app for finding roommates
+* **Resume WebApp**: [Python, Streamlit] Interactive app showcasing resume, certifications, and projects
+* **JC-Plus**: [Java, C] Programming Language that adds objects and class-based inheritance to C
 
 ---
 
 ### 🛠️ Technical Skills
 
-- **Programming Languages**: Python, SQL, Java, C/C++
-- **Cloud & DevOps**: AWS, GCP, Git
-- **Data Science**: Machine Learning, Statistical Analysis, ETL, MLOps
-- **Certifications**: AWS Certified Solution Architect, Azure Fundamentals (AZ900), Machine Learning Specialization, Database Technician
+* **Programming Languages**: Python, SQL, Java, C/C++
+* **Cloud & DevOps**: AWS, GCP, Git
+* **Data Science**: Machine Learning, Statistical Analysis, ETL, MLOps, LLMs
+* **Certifications**: AWS Certified Solution Architect, Azure Fundamentals (AZ900), Machine Learning Specialization, Database Technician
 
 ---
 
 ### 🎸 Hobbies & Interests
 
-- Playing guitar, bass, and synthesizer.
-- Exploring new music (five new albums weekly on average).
-- Hiking, golf, tennis, and exploring nature.
-- Following NFL (favorite team is the LA Rams) and UFC. 
-- Traveling, trying new foods, watching documentaries, playing video games.
+* Playing guitar, bass, and synthesizer
+* Exploring new music (five new albums weekly on average)
+* Hiking, golf, tennis, and exploring nature
+* Following NFL (LA Rams) and UFC
+* Traveling, trying new foods, watching documentaries, playing video games
 
 ---
 
 ### 🔗 Links
 
-- [GitHub (Personal)](https://github.com/osherboudara99)
-- [GitHub (Work)](https://github.com/osherboudara-work)
-- [LinkedIn](https://www.linkedin.com/in/osher-boudara-a612921b5/)
+* [GitHub (Personal)](https://github.com/osherboudara99)
+* [GitHub (Work)](https://github.com/osherboudara-work)
+* [LinkedIn](https://www.linkedin.com/in/osher-boudara-a612921b5/)
