@@ -2,10 +2,6 @@ chromadb
 gdown
 sentence_transformers
 openai
-requests 
-streamlit-pdf-viewer
-datetime
-torch
-nltk
-pysqlite3-binary
+requests
+streamlit
 streamlit-pdf-viewer

@@ -16,7 +16,6 @@ import re
 def load_embedder():
     return SentenceTransformer("all-MiniLM-L6-v2")
 
-@st.cache_resource
 def load_vectorstore():
     client = chromadb.PersistentClient(path="db")
     return client.get_or_create_collection("osher_docs")
@@ -28,7 +27,7 @@ def call_openai(prompt, max_tokens=150):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context about Osher Boudara. Provide a single, concise answer. Do NOT answer any other questions. Do NOT generate any additional questions or answers. If the answer is not in the context, say: \"I'm sorry, I can only answer questions about Osher Boudara or general small talk.\" Do NOT make up any information or use knowledge outside the context. Do not infer or guess."},
+                {"role": "system", "content": "You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context about Osher. Provide a single, concise answer. Do NOT answer any other questions. Do NOT generate any additional questions or answers. If the answer is not in the context, say: \"I'm sorry, I can only answer questions about Osher Boudara or general small talk.\" Do NOT make up any information or use knowledge outside the context. Do not infer or guess."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=max_tokens,
