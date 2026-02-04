@@ -179,16 +179,16 @@ def home_page_header_setup():
         </div>
         <div style="max-width: 850px; font-size: 16px; line-height: 1.6;">
             <p>
-            As a Senior Data Scientist at Cognizant, I am leading and developing projects in data science and engineering teams for the crop science division of a global Fortune 500 company. I use my data science skillset to deliver solutions that meet the client's needs and expectations.
+            As a Senior Data Scientist at Cognizant, I lead and develop projects in data science initiatives for the Crop Science division of a global Fortune 500 client. I use my data science skillset to support stakeholders and deliver solutions.
             </p>
             <p>
-            I have a B.S. in Computer Science and a minor in Statistics from California State University, Northridge, where I graduated with honors. I am passionate about conducting statistical research and transforming dataframes into actionable insights. My expertise in Python, SQL and cloud-based architectures have allowed me to develop scalable tools that provide unique solutions.
+            I have a B.S. in Computer Science and a minor in Statistics from California State University, Northridge, where I graduated with honors. I am passionate about conducting statistical research and transforming dataframes into actionable insights. My expertise in machine learning, generative AI and cloud-based architectures have allowed me to develop scalable tools that provide unique solutions.
             </p>
             <p>
-            Fun facts about me: I'm bilingual and currently based in Boston, MA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a fan of the Los Angeles Rams.
+            Fun facts about me: I'm bilingual and currently based in Los Angeles, CA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a fan of the Los Angeles Rams.
             </p>
             <p>
-            Chat with my friend Rebbe in the sidebar, to learn more about me and my work!
+            Chat with my friend Rebbe in the sidebar to learn more about me and my work!
             </p>
         </div>
     </div>
