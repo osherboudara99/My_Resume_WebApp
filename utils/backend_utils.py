@@ -67,6 +67,8 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
     # Clean up resume format for displaying on app
 
     resume_markdown = read_file_object(os.path.join(dir_path, 'resume', 'osher_boudara_resume.md'))
+    # strip code fences if present
+    resume_markdown = resume_markdown.replace('```markdown', '').replace('```', '').strip()
     email_number_aligned = """
         <p style='text-align: center; font-size: 18px;'>
             <a href='mailto:osherboudara99@gmail.com'>osherboudara99@gmail.com</a> | 818.809.4261
@@ -83,7 +85,14 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
 
     resume_markdown = resume_markdown.replace('\n## *', '--- \n## *')
 
-    links_markdown = """\n --- \n## Links \n 
+    education_markdown = resume_markdown[resume_markdown.find('**Ca'):].replace('*', '')
+    education_markdown = education_markdown.replace('California', '- California')
+    education_markdown = education_markdown.replace('Los', '- Los')
+    education_markdown = education_markdown.replace('Bar Ilan', '- Bar Ilan')
+    resume_markdown = resume_markdown[:resume_markdown.find('**Ca')]
+    resume_markdown = resume_markdown + '\n' + education_markdown
+
+    links_markdown = """\n --- \n## LINKS \n 
 | <a href="https://www.linkedin.com/in/osher-boudara-a612921b5/" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
         <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 24h5V7H0v17zm7.5-17h4.7v2.5h.07c.66-1.25 2.3-2.5 4.73-2.5 5.05 0 5.98 3.32 5.98 7.63V24h-5v-7.33c0-1.75-.03-4-2.43-4s-2.8 1.9-2.8 3.87V24h-5V7z"/>
@@ -101,6 +110,11 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
 """
 
     resume_markdown = resume_markdown + links_markdown 
+
+    # final sanitization: remove any remaining bold markers and unescape hyphens
+    resume_markdown = resume_markdown.replace('**', '')
+    resume_markdown = resume_markdown.replace('\\-', '-')
+
     return resume_markdown
 
 #### GITHUB FUNCTIONS
