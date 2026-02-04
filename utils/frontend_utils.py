@@ -188,7 +188,7 @@ def home_page_header_setup():
             Fun facts about me: I'm bilingual and currently based in Los Angeles, CA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a fan of the Los Angeles Rams.
             </p>
             <p>
-            Chat with my friend Rebbe in the sidebar to learn more about me and my work!
+            Chat with my friend, Rebbe, to learn more about me and my work!
             </p>
         </div>
     </div>
