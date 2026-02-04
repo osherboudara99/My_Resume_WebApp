@@ -2,6 +2,7 @@ import streamlit as st
 import openai
 from sentence_transformers import SentenceTransformer
 import sys
+import os
 # # Add pysqlite3 support for Streamlit Cloud
 # import platform
 # if platform.system() != "Windows":
@@ -27,7 +28,7 @@ def call_openai(prompt, max_tokens=150):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context about Osher. Provide a single, concise answer. Do NOT answer any other questions. Do NOT generate any additional questions or answers. If the answer is not in the context, say: \"I'm sorry, I can only answer questions about Osher Boudara or general small talk.\" Do NOT make up any information or use knowledge outside the context. Do not infer or guess."},
+                {"role": "system", "content": "You are Rebbe, an assistant who answers ONLY the user's question below, using ONLY the provided context about Osher unless question is considered small talk. Provide a single, concise answer. Do NOT answer any other questions. Do NOT generate any additional questions or answers. If the answer is not in the context, say: \"I'm sorry, I can only answer questions about Osher Boudara or general small talk.\" Do NOT make up any information or use knowledge outside the context. Do not infer or guess."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=max_tokens,
@@ -54,7 +55,8 @@ def retrieve_and_answer(query):
         "hi how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hello how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hi how are you?": "I'm doing well, thank you for asking! How can I help you today?",
-        "hello how are you?": "I'm doing well, thank you for asking! How can I help you today?",
+        "hello, how are you?": "I'm doing well, thank you for asking! How can I help you today?",
+        "hello, how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "what is your name": "I am Rebbe, an AI assistant here to answer questions about Osher Boudara based on the provided context.",
