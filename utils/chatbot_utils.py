@@ -2,11 +2,11 @@ import streamlit as st
 import openai
 from sentence_transformers import SentenceTransformer
 import sys
-# Add pysqlite3 support for Streamlit Cloud
-import platform
-if platform.system() != "Windows":
-    __import__('pysqlite3')
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# # Add pysqlite3 support for Streamlit Cloud
+# import platform
+# if platform.system() != "Windows":
+#     __import__('pysqlite3')
+#     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 
 import chromadb
