@@ -166,7 +166,6 @@ models/
 test/
 
 secrets.toml
-.streamlit/
 
 # Ignore everything in the lambda_function_sleep_mode_prevention folder
 lambda_function_sleep_mode_prevention/*
