@@ -179,16 +179,15 @@ def home_page_header_setup():
         </div>
         <div style="max-width: 850px; font-size: 16px; line-height: 1.6;">
             <p>
-            As a Senior Data Scientist at Cognizant, I lead and develop projects in data science initiatives for the Crop Science division of a global Fortune 500 client. I use my data science skillset to support stakeholders and deliver solutions.
+            I’m a Senior Data Scientist at Cognizant, leading data science initiatives for a Fortune 500 Crop Science client. I partner closely with stakeholders to design, develop, and deploy scalable machine learning and AI solutions that turn complex data into measurable business impact.
             </p>
             <p>
-            I have a B.S. in Computer Science and a minor in Statistics from California State University, Northridge, where I graduated with honors. I am passionate about conducting statistical research and transforming dataframes into actionable insights. My expertise in machine learning, generative AI and cloud-based architectures have allowed me to develop scalable tools that provide unique solutions.
+            My work focuses on statistical modeling, machine learning, generative AI, and cloud-based architectures. I specialize in transforming complex datasets into actionable insights and building production-ready systems that create lasting value.
+            <p>
+            I earned a B.S. in Computer Science with a minor in Statistics from California State University, Northridge, graduating with honors. Outside of work, I’m bilingual and based in Los Angeles, CA. I enjoy producing and playing music, exercising, exploring new cuisines, and traveling. I’m also a proud Los Angeles Rams fan.
             </p>
             <p>
-            Fun facts about me: I'm bilingual and currently based in Los Angeles, CA. I enjoy making music, trying new foods, and exploring the world around me. I'm also a fan of the Los Angeles Rams.
-            </p>
-            <p>
-            Chat with my friend, Rebbe, to learn more about me and my work!
+            Feel free to chat with my AI assistant, Rebbe, to learn more about my work and projects.
             </p>
         </div>
     </div>
