@@ -181,15 +181,12 @@ def home_page_header_setup():
             <p>
             I’m a Senior Data Scientist at Cognizant, leading data science initiatives for a Fortune 500 Crop Science client. I partner closely with stakeholders to design, develop, and deploy scalable machine learning and generative AI solutions that drive measurable business impact.
             </p>
-
             <p>
             My work spans statistical modeling, machine learning, generative AI, and cloud-based architectures. I specialize in transforming complex datasets into actionable insights and building production-ready systems that create lasting value.
             </p>
-
             <p>
             I earned a B.S. in Computer Science with a minor in Statistics from California State University, Northridge, graduating with honors. Based in Los Angeles and bilingual, I enjoy producing and playing music, training, exploring new cuisines, and traveling — and I’m a proud Los Angeles Rams fan.
             </p>
-
             <p>
             Feel free to chat with my AI assistant, Rebbe, to learn more about my work and projects.
             </p>
