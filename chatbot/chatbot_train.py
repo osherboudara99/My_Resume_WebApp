@@ -17,7 +17,7 @@ resume_directory_path = os.path.join(dir_path, "resume")  # Path to the resume f
 VECTOR_DB_DIR = "db"  # Directory to store the vector database
 MODEL_NAME = "all-MiniLM-L6-v2"  # Name of the embedding model
 
-def preprocess_text(text):
+def preprocess_text(text: str) -> str:
     """
     Preprocesses the input text by:
     - Converting it to lowercase
@@ -33,7 +33,7 @@ def preprocess_text(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-def parse_and_clean_resume(file_path):
+def parse_and_clean_resume(file_path: str) -> str:
     """
     Reads and cleans a markdown file by:
     - Removing unnecessary tags (e.g., \[\[BR\]\])
@@ -78,7 +78,7 @@ def parse_and_clean_resume(file_path):
     # Return the cleaned content as a single string
     return "\n".join(cleaned_content)
 
-def load_documents():
+def load_documents() -> list[dict[str, str]]:
     """
     Loads text and markdown files from the resume directory.
     - For .txt files (only aboutme.txt currently): Reads the content directly.
@@ -105,7 +105,7 @@ def load_documents():
     return docs
 
 
-def chunk_by_section(text):
+def chunk_by_section(text: str) -> list[str]:
     """
     Splits text into sections based on markdown headers (### or ####).
     Each section will be used as a chunk for embedding.
@@ -115,7 +115,7 @@ def chunk_by_section(text):
     # Clean up and filter out empty sections
     return [section.strip() for section in sections if section.strip()]
 
-def embed_and_store(test_mode=False):
+def embed_and_store(test_mode: bool = False) -> None:
     """
     Embeds the documents and stores them in a persistent vector database.
     Uses section-based chunking for better retrieval.

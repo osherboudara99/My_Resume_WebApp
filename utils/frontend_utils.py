@@ -10,12 +10,12 @@ import time
 
 dir_path = os.getcwd()
 
-def load_css(file_name=os.path.join(dir_path, 'utils', 'style.css')):
+def load_css(file_name: str = os.path.join(dir_path, 'utils', 'style.css')) -> None:
     with open(file_name) as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-def resume_view_and_download(resume_pdf_path = backend.resume_pdf_path, resume_download_name=backend.resume_name):
+def resume_view_and_download(resume_pdf_path: str = backend.resume_pdf_path, resume_download_name: str = backend.resume_name) -> None:
     with st.expander('View Resume PDF'):
         pdf_viewer(resume_pdf_path)
 
@@ -24,7 +24,7 @@ def resume_view_and_download(resume_pdf_path = backend.resume_pdf_path, resume_d
     st.download_button("Download Resume", data=backend.pdf_reader(resume_pdf_path), file_name=resume_download_name)
 
 
-def certification_view(cert_name, cert_name_display, credential_link=None, dir_path=dir_path, validate=None):
+def certification_view(cert_name: str, cert_name_display: str, credential_link: str | None = None, dir_path: str = dir_path, validate: str | None = None) -> None:
     cert_path = os.path.join(dir_path, 'certifications', cert_name)
 
 
@@ -41,7 +41,7 @@ def certification_view(cert_name, cert_name_display, credential_link=None, dir_p
         
             st.download_button(f"Download {cert_name_display}", data=backend.pdf_reader(cert_path), file_name=cert_name, mime='application/pdf')
 
-def create_repo_sort(repos):
+def create_repo_sort(repos: list[dict]) -> list[dict]:
 
     st.markdown("""
         <style>
@@ -97,7 +97,7 @@ def create_repo_sort(repos):
     return repos
 
 
-def display_repos(repos):
+def display_repos(repos: list[dict]) -> None:
     for repo in repos:
         with st.container():
             st.markdown(f"### [{repo['name']}]({repo['html_url']})")
@@ -112,7 +112,7 @@ def display_repos(repos):
             st.markdown("---")
 
 
-def home_page_header_setup():
+def home_page_header_setup() -> None:
     st.markdown("<h1 class='animated-widget' justify-content: center; style='text-align: center; color: white;'>Osher Boudara</h1>", unsafe_allow_html=True)
 
 

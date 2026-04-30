@@ -13,15 +13,15 @@ import chromadb
 import re
 
 @st.cache_resource
-def load_embedder():
+def load_embedder() -> SentenceTransformer:
     return SentenceTransformer("all-MiniLM-L6-v2")
 
-def load_vectorstore():
+def load_vectorstore() -> chromadb.Collection:
     client = chromadb.PersistentClient(path="db")
     return client.get_or_create_collection("osher_docs")
 
 
-def call_openai(prompt, max_tokens=150):
+def call_openai(prompt: str, max_tokens: int = 150) -> str:
     try:
         client = openai.OpenAI(api_key=st.secrets.get("OPENAI_KEY") or os.getenv("OPENAI_KEY"))
         response = client.chat.completions.create(
@@ -49,7 +49,7 @@ def call_openai(prompt, max_tokens=150):
         print("OpenAI API error:", e)
         return "I'm sorry, I couldn't generate a response. Please try again later."
 
-def retrieve_and_answer(query):
+def retrieve_and_answer(query: str) -> str:
     general_responses = {
         "hi how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hello how are you": "I'm doing well, thank you for asking! How can I help you today?",
@@ -98,7 +98,7 @@ def retrieve_and_answer(query):
     try:
         answer = call_openai(prompt, max_tokens=150)
         # If the model returns an incomplete list (e.g., ends with ':' or 'the following projects'), retry with explicit instruction and higher token limit
-        def is_truncated_list(text):
+        def is_truncated_list(text: str | None) -> bool:
             t = (text or "").strip().lower()
             if not t:
                 return True
@@ -142,7 +142,7 @@ def retrieve_and_answer(query):
 
 
 
-def create_sidebar():
+def create_sidebar() -> None:
 
     st.markdown(
         """

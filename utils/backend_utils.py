@@ -20,22 +20,22 @@ github_key = st.secrets.get("GITHUB_KEY") or os.getenv("GITHUB_KEY")
 
 
 @st.cache_data
-def get_base64_image(image_path):
+def get_base64_image(image_path: str) -> str:
     with open(image_path, "rb") as img_file:
         encoded = base64.b64encode(img_file.read()).decode()
     return f"data:image/jpeg;base64,{encoded}"
 
-def read_file_object(markdown_file):
+def read_file_object(markdown_file: str) -> str:
     return Path(markdown_file).read_text()
 
 
 @st.cache_data
-def download_google_doc_file(url, output_file_name):
+def download_google_doc_file(url: str, output_file_name: str) -> str | None:
 
     return gdown.download(url, output_file_name, quiet=False, fuzzy=True)
 
 @st.cache_data
-def download_multiple_google_doc_files(file_path:str=resume_pdf_path, url:str=resume_url, additional_file_formats:list=['pdf', 'md']):
+def download_multiple_google_doc_files(file_path: str = resume_pdf_path, url: str = resume_url, additional_file_formats: list[str] = ['pdf', 'md']) -> None:
     
     # Download resume in multiple formats
     export_str = 'export?format='
@@ -57,13 +57,13 @@ def download_multiple_google_doc_files(file_path:str=resume_pdf_path, url:str=re
 
 
 @st.cache_data
-def pdf_reader(pdf_file):
+def pdf_reader(pdf_file: str) -> bytes:
     with open(pdf_file, "rb") as f:
         PDFbyte = f.read()
     return PDFbyte
 
 @st.cache_data
-def read_and_correct_resume_markdown(dir_path = dir_path):
+def read_and_correct_resume_markdown(dir_path: str = dir_path) -> str:
     # Clean up resume format for displaying on app
 
     resume_markdown = read_file_object(os.path.join(dir_path, 'resume', 'osher_boudara_resume.md'))
@@ -119,7 +119,7 @@ def read_and_correct_resume_markdown(dir_path = dir_path):
 
 #### GITHUB FUNCTIONS
 
-def convert_github_timestamp(timestamp):
+def convert_github_timestamp(timestamp: str) -> tuple[str, str]:
     dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     human_readable = dt.strftime("%B %d, %Y at %I:%M %p")
     now = datetime.now(timezone.utc)
@@ -141,7 +141,7 @@ def convert_github_timestamp(timestamp):
     return human_readable, relative
 
 @st.cache_data
-def fetch_languages(owner, repo, token=github_key):
+def fetch_languages(owner: str, repo: str, token: str | None = github_key) -> str:
     url = f"https://api.github.com/repos/{owner}/{repo}/languages"
     headers = {"Authorization": f"token {token}"} if token else {}
     response = requests.get(url, headers=headers)
@@ -153,7 +153,7 @@ def fetch_languages(owner, repo, token=github_key):
         return "Unknown"
 
 @st.cache_data
-def get_repos(username, token=github_key):
+def get_repos(username: str, token: str | None = github_key) -> list[dict]:
     url = f"https://api.github.com/users/{username}/repos?per_page=100"
     headers = {"Authorization": f"token {token}"} if token else {}
     response = requests.get(url, headers=headers)
