@@ -3,7 +3,7 @@ import utils.backend_utils as backend
 import utils.frontend_utils as frontend
 import utils.chatbot_utils as chatbot
 
-st.set_page_config(layout="wide", page_icon=':notebook:')
+st.set_page_config(layout="wide", page_title="Certifications", page_icon=':notebook:')
 
 frontend.load_css()
 
@@ -13,13 +13,11 @@ st.markdown("<h1 style='text-align: center; color: white;'>Certifications</h1>",
 
 st.markdown("<p style='text-align: center; color: white;'>Below are a few of my certifications. \
             For additional certifications, please check out my <a href=https://www.linkedin.com/in/osher-boudara-a612921b5/details/certifications/>LinkedIn</a></p>", unsafe_allow_html=True)
-aws_ccp_cert_name = 'Osher_B_AWS_CCP_cert.pdf'
 aws_sa_cert_name = 'Osher_B_AWS_SA_cert.pdf'
 azure_fund_cert_name = 'Osher_B_AZ900_cert_rotated.pdf'
 usdl_dbtech_cert_name = 'Osher_B_Database_Tech_USDL_cert.pdf'
 uw_ml_cert_name = 'Osher_B_ml_specialization_UW_Coursera_cert.pdf'
 
-aws_ccp_display_name = 'AWS Certified Cloud Practitioner'
 aws_sa_display_name = 'AWS Certified Solution Architect Associate'
 azure_fund_display_name = 'Microsoft Certified: Azure Fundamentals (AZ900)'
 usdl_dbtech_display_name = 'Database Technician Apprenticeship from US Department of Labor'

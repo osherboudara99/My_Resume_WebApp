@@ -1,7 +1,6 @@
 import streamlit as st
 import openai
 from sentence_transformers import SentenceTransformer
-import sys
 import os
 # # Add pysqlite3 support for Streamlit Cloud
 # import platform

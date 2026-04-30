@@ -104,35 +104,6 @@ def load_documents():
             logging.error(f"Failed to load document {filename}: {e}")
     return docs
 
-def chunk_text(text, chunk_size=500, overlap=100):
-    """
-    Splits a large text into smaller chunks of a specified size with overlap.
-    Args:
-        text (str): The input text to be chunked
-        chunk_size (int): The maximum size of each chunk
-        overlap (int): The number of overlapping characters between chunks
-    Returns:
-        list: A list of text chunks
-    """
-    sentences = sent_tokenize(text)  # Split text into sentences
-    chunks, current_chunk = [], []
-    current_length = 0
-
-    for sentence in sentences:
-        sentence_length = len(sentence)
-        # If adding the sentence exceeds the chunk size, finalize the current chunk
-        if current_length + sentence_length > chunk_size:
-            chunks.append(" ".join(current_chunk))
-            current_chunk = current_chunk[-overlap:]  # Retain overlap
-            current_length = sum(len(s) for s in current_chunk)
-        current_chunk.append(sentence)
-        current_length += sentence_length
-
-    # Add the last chunk if it exists
-    if current_chunk:
-        chunks.append(" ".join(current_chunk))
-
-    return chunks
 
 def chunk_by_section(text):
     """

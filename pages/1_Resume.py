@@ -1,7 +1,7 @@
 import streamlit as st
 import utils.backend_utils as backend, utils.frontend_utils as frontend, utils.chatbot_utils as chatbot
 
-st.set_page_config(layout='wide', page_title='Home', page_icon=":house:")
+st.set_page_config(layout='wide', page_title='Resume', page_icon=":paper:")
 
 frontend.load_css()
 chatbot.create_sidebar()
