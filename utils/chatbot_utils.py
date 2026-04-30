@@ -55,7 +55,6 @@ def retrieve_and_answer(query):
         "hello how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "hi how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "hello, how are you?": "I'm doing well, thank you for asking! How can I help you today?",
-        "hello, how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "how are you": "I'm doing well, thank you for asking! How can I help you today?",
         "how are you?": "I'm doing well, thank you for asking! How can I help you today?",
         "what is your name": "I am Rebbe, an AI assistant here to answer questions about Osher Boudara based on the provided context.",

@@ -11,7 +11,7 @@ from dateutil import relativedelta
 # Default Args
 dir_path = os.getcwd()
 resume_url = 'https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5QiKQCwdsKMlQA/'
-resume_directory_path = os.path.join(dir_path, 'resume', 'self.jpeg')
+profile_photo_path = os.path.join(dir_path, 'resume', 'self.jpeg')
 resume_name = 'osher_boudara_resume.pdf'
 resume_pdf_path = os.path.join(dir_path, 'resume', resume_name)
 github_key = st.secrets.get("GITHUB_KEY") or os.getenv("GITHUB_KEY")
@@ -19,6 +19,7 @@ github_key = st.secrets.get("GITHUB_KEY") or os.getenv("GITHUB_KEY")
 
 
 
+@st.cache_data
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         encoded = base64.b64encode(img_file.read()).decode()
@@ -39,7 +40,7 @@ def download_multiple_google_doc_files(file_path:str=resume_pdf_path, url:str=re
     # Download resume in multiple formats
     export_str = 'export?format='
 
-    file_extension = file_path.split('.')[1]
+    file_extension = Path(file_path).suffix.lstrip('.')
 
     if file_extension not in additional_file_formats:
         additional_file_formats.append(file_extension)
@@ -50,9 +51,8 @@ def download_multiple_google_doc_files(file_path:str=resume_pdf_path, url:str=re
 
         export_url = url + export_format
 
-        file_path = file_path.split('.')[0] + '.' + format
+        file_path = str(Path(file_path).with_suffix('.' + format))
         
-        print(file_path)
         download_google_doc_file(url=export_url, output_file_name=file_path)
 
 
@@ -149,7 +149,7 @@ def fetch_languages(owner, repo, token=github_key):
         keys_str = ' | '.join(response.json().keys())
         return keys_str
     else:
-        print(f"Error fetching languages for {repo}: {response.status_code}")
+        # print(f"Error fetching languages for {repo}: {response.status_code}")
         return "Unknown"
 
 @st.cache_data
