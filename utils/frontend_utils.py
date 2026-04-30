@@ -190,8 +190,6 @@ def home_page_header_setup():
             <p>
             Feel free to chat with my AI assistant, Rebbe, to learn more about my work and projects.
             </p>
-
-        </div>
     </div>
     """, unsafe_allow_html=True)
 

@@ -162,6 +162,10 @@ def create_sidebar():
                     -webkit-font-feature-settings: 'liga';
                     -webkit-font-smoothing: antialiased;
                 }
+                [data-testid="stChatInput"] textarea {
+                    min-height: 70px !important;
+                    font-size: 15px !important;
+                }
             </style>
         </head>
         """,
@@ -174,29 +178,31 @@ def create_sidebar():
 
         if "chat_history" not in st.session_state:
             st.session_state.chat_history = []
-        
+
         user_input = st.chat_input("Ask a question about Osher...")
 
+        if st.session_state.chat_history:
+            if st.button("🗑️ Clear Chat", use_container_width=True):
+                st.session_state.chat_history = []
+                st.rerun()
+
         if user_input:
+            st.session_state.chat_history.append(("User", user_input))
             with st.spinner("Rebbe is thinking..."):
                 answer = retrieve_and_answer(user_input)
-                # Remove unwanted prefixes and duplicate lines
                 answer = answer.replace("<|assistant|>", "").replace("[ai]:", "").replace("== response ==", "").strip()
                 lines = []
                 for line in answer.split('\n'):
                     if line.strip() and line.strip() not in lines:
                         lines.append(line.strip())
                 answer = "\n".join(lines)
-            st.session_state.chat_history.append(("User", user_input))
             st.session_state.chat_history.append(("Rebbe", answer))
-        
-        # Display chat history 
-        for sender, msg in st.session_state.chat_history:
+            st.rerun()
+
+        # Newest messages at top, oldest at bottom
+        for sender, msg in reversed(st.session_state.chat_history):
             with st.chat_message("user" if sender == "User" else "assistant"):
-                if sender == "Rebbe":
-                    st.markdown(f"**Rebbe:** {msg}")
-                else:
-                    st.markdown(msg)
+                st.markdown(msg)
 
 embedder = load_embedder()
 vectorstore = load_vectorstore()
