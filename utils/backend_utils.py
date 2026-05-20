@@ -75,6 +75,8 @@ def read_and_correct_resume_markdown(dir_path: str = dir_path) -> str:
         </p>
     """
     resume_markdown = resume_markdown.replace('# **OSHER BOUDARA**', '')
+    resume_markdown = resume_markdown.replace('Senior Data Scientist | Full Stack Applied AI Engineer', '')  
+    resume_markdown = resume_markdown.replace('osherboudara99@gmail.com | 818.809.4261 | [osherboudara.com](https://osherboudara.com/) | [LinkedIn](https://www.linkedin.com/in/osher-boudara-a612921b5/) | [GitHub](https://www.github.com/osherboudara99/)', '')
     resume_markdown = resume_markdown.replace('[osherboudara99@gmail.com](mailto:osherboudara99@gmail.com) | 818.809.4261', '')
     resume_markdown = resume_markdown.replace("â€™", "'")
     resume_markdown = email_number_aligned + resume_markdown
