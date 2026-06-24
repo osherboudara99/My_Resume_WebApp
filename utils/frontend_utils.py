@@ -152,7 +152,7 @@ def home_page_header_setup() -> None:
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     var typed = new Typed('#typed-text', {
-                        strings: ["a Applied AI Engineer.",  "a Full Stack Developer.", "a Data Scientist.", "a Python Developer.", "a Solutions Architect.", "a Musician.",
+                        strings: ["an Applied AI Engineer.",  "a Full Stack Developer.", "a Data Scientist.", "a Python Developer.", "a Solutions Architect.", "a Musician.",
                     "a Data Engineer.", "a Software Engineer.", "a Machine Learning Engineer."],
                         typeSpeed: 100,
                         backSpeed: 50,
