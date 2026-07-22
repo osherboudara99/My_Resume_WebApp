@@ -1,8 +1,14 @@
+### 🧑‍💻 Professional Title
+
+Senior Data Scientist | Full-Stack Applied AI Engineer
+
+---
+
 ### 💼 Professional Experience
 
 **Cognizant** — Senior Associate Data Scientist (August 2022 – Present)
 
-* Promoted in recognition of technical excellence and project leadership
+* Promoted from Associate Data Scientist to Senior Associate Data Scientist in May 2025, in recognition of technical excellence 
 * Continue leading end-to-end data science projects for Fortune 500 crop science client
 * Implement comprehensive data science lifecycle including:
 
@@ -11,9 +17,17 @@
   * MLOps and cloud infrastructure (AWS/GCP)
   * Version control, analytics, and visualization
 
+* Built full-stack, agentic GCP applications supporting enterprise cloud migration:
+
+  * Intake Concierge: centralized intake and registry platform for automated project scoping, feasibility assessment, and requirements gathering
+  * LTO Hub: RAG assistant over 500+ access-controlled SharePoint documents
+  * Crop Protection Labeler: analyzes uploaded herbicide and pesticide label images to provide safe product-use recommendations, supporting regulatory compliance and mitigating legal risk
+* Developed Python/Google ADK/Vertex AI backends, React TypeScript frontends, Cloud SQL/GCS/RAG Engine integrations, Terraform/Kubernetes/Artifact Registry deployment workflows, and Opik-based telemetry and evaluation
+
 * Developed Climate Change Impact and Adaptation Tool:
 
   * Built customizable crop lifecycle simulation framework using ETL pipelines and MLOps
+  * Framework built with FastAPI/Pydantic around the DSSAT crop simulation model, scaling from ad hoc analyses to large-scale simulations across years, geographies, and climate scenarios
   * Simulates crop growth under climate change scenarios through 2100
   * Provides insights on yields, environmental conditions, emissions, and agro-management
   * Supports long-term business strategy and risk mitigation
@@ -21,6 +35,7 @@
 
   * Leveraged LLMs and RAG to analyze competitor financials, strategic shifts, and headcount trends
   * Integrated LangGraph agents with AWS-hosted document retrieval layer
+  * Developed LLM-driven hiring and headcount analyses and tracked organizational investment trends to generate actionable insights
 * Delivered patentable Market Share Forecast Tool:
 
   * Employs advanced MLOps and data science techniques for predictions, classification, and feature extraction
@@ -47,13 +62,18 @@
   * Conducted exploratory data analysis (EDA) to uncover operational insights
   * Enhanced team productivity through automated reporting
 
+**Cherre** — Data Engineer Intern (May 2021 - Aug 2021)
+
+* Built repeatable SQL workflows and analytics pipelines on GCP (BigQuery, GCS, Data Studio)
+* Enabled data lineage analysis and scalable reporting
+
 ---
 
 ### 👤 Personal Background
 
 * Born in San Diego, California; raised in Los Angeles, California.
-* Associate’s Degree in Mathematics from Los Angeles Valley College.
-* B.S. in Computer Science, minor in Statistics, from California State University, Northridge (CSUN).
+* Associate’s Degree (A.S.) in Mathematics from Los Angeles Valley College (LAVC), June 2020.
+* B.S. in Computer Science, minor in Statistics, from California State University, Northridge (CSUN), May 2022.
 * Gap year at Bar Ilan University, Tel Aviv.
 * Lived in Phoenix, AZ for 1 year. Lived in Cambridge, MA for 3 years. Currently lives in Los Angeles, CA.
 
@@ -61,6 +81,9 @@
 
 ### 💻 Key Projects
 
+* **Intake Concierge**: [Python, Google ADK, Vertex AI, React, TypeScript] Centralized intake and registry platform for automated project scoping, feasibility assessment, and requirements gathering
+* **LTO Hub**: [Python, Google ADK, RAG, Vertex AI, K8s, React] RAG assistant over 500+ access-controlled SharePoint documents
+* **Crop Protection Labeler**: [Python, Vertex AI, React] Analyzes herbicide and pesticide label images to provide safe product-use recommendations for regulatory compliance and legal-risk mitigation
 * **Agentic Competitive Intelligence Platform**: [Python, AWS, LangGraph] Analyzes competitor financials, headcount trends, and strategic shifts using LLMs and RAG
 * **Climate Impact and Adaptation Tool**: [Python, AWS] Simulates global crop growth under climate change scenarios; provides business insights
 * **Market Share Forecast Tool**: [Python, MLOps] Patentable predictive tool for market share shifts
@@ -69,16 +92,18 @@
 * **Song Popularity Prediction**: [Python, XGBoost, Random Forest] Predicts song popularity using Spotify data and regression models
 * **Loan Default Prediction**: [Python, Scikit-learn] Compares classification models to predict loan defaults
 * **RoommateFinderApp**: [React Native, Python] Mobile app for finding roommates
-* **Resume WebApp**: [Python, Streamlit] Interactive app showcasing resume, certifications, and projects
+* **Resume WebApp**: [Python, React] Interactive app showcasing resume, certifications, and projects
 * **JC-Plus**: [Java, C] Programming Language that adds objects and class-based inheritance to C
 
 ---
 
 ### 🛠️ Technical Skills
 
-* **Programming Languages**: Python, SQL, Java, C/C++
-* **Cloud & DevOps**: AWS, GCP, Git
-* **Data Science**: Machine Learning, Statistical Analysis, ETL, MLOps, LLMs
+* **Programming Languages**: Python, SQL, React, TypeScript, Java, C/C++
+* **Databases**: PostgreSQL, MySQL, BigQuery
+* **Cloud & DevOps**: AWS, GCP, Git, Vertex AI (Agent Engine), Cloud SQL, GCS, Terraform, Kubernetes, Artifact Registry
+* **AI & Agentic**: LLMs, RAG, Agentic AI, Google ADK, LangGraph, Opik (telemetry & evaluation)
+* **Data Science**: Machine Learning, Statistical Analysis, ETL, MLOps, LLMs, GenAI
 * **Certifications**: AWS Certified Solution Architect, Azure Fundamentals (AZ900), Machine Learning Specialization, Database Technician
 
 ---
