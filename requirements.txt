@@ -1,7 +1,0 @@
-chromadb
-gdown
-sentence_transformers
-openai
-requests
-streamlit
-streamlit-pdf-viewer
