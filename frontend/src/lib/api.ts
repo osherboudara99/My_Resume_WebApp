@@ -25,6 +25,16 @@ export async function fetchRepos(): Promise<Repo[]> {
   return data.repos as Repo[]
 }
 
+export interface GithubStats {
+  total_commits: number
+}
+
+export async function fetchGithubStats(): Promise<GithubStats> {
+  const res = await fetch(`${API_BASE}/api/github/stats`)
+  if (!res.ok) throw new Error("Failed to load GitHub stats")
+  return (await res.json()) as GithubStats
+}
+
 export async function fetchResumeMarkdown(): Promise<string> {
   const res = await fetch(`${API_BASE}/api/resume`)
   if (!res.ok) throw new Error("Failed to load resume")
