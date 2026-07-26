@@ -10,6 +10,7 @@ import { NAME } from './data/site'
 export default function App() {
   return (
     <div id="top" className="min-h-svh">
+      <div className="grid-bg pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />
       <Nav />
 
       <main className="mx-auto max-w-5xl px-6">

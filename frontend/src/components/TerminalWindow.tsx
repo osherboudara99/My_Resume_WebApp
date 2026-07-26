@@ -4,9 +4,15 @@ interface Props {
   title: string
   children: ReactNode
   className?: string
+  bodyClassName?: string
 }
 
-export default function TerminalWindow({ title, children, className = '' }: Props) {
+export default function TerminalWindow({
+  title,
+  children,
+  className = '',
+  bodyClassName = 'p-5',
+}: Props) {
   return (
     <div
       className={`overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/60 dark:border-white/10 dark:bg-white/[0.03] ${className}`}
@@ -21,7 +27,7 @@ export default function TerminalWindow({ title, children, className = '' }: Prop
           {title}
         </span>
       </div>
-      <div className="p-5">{children}</div>
+      <div className={bodyClassName}>{children}</div>
     </div>
   )
 }

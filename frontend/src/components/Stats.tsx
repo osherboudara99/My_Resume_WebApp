@@ -55,7 +55,7 @@ export default function Stats() {
   }, [])
 
   return (
-    <Section id="stats" title="// stats" subtitle="A few numbers, live from the source.">
+    <Section id="stats" title="Stats" subtitle="A few numbers, live from the source.">
       <div className="grid gap-4 sm:grid-cols-2">
         <StatCard title="git log --oneline | wc -l" value={commits ?? 0} loading={commits === null} />
         <StatCard title="music.app --played-count" value={musicPlays} />

@@ -56,6 +56,19 @@
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(100deg, #aa3bff 0%, #6366f1 50%, #22d3ee 100%);
   }
+
+  /* Faint IDE-style grid behind the whole page. */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+  .dark .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  }
 }
 
 /* Markdown coming back from /api/resume — styled here rather than pulling in
