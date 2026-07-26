@@ -9,11 +9,13 @@ function StatCard({
   title,
   value,
   suffix,
+  caption,
   loading,
 }: {
   title: string
   value: number
   suffix?: string
+  caption?: string
   loading?: boolean
 }) {
   const display = useCountUp(loading ? 0 : value)
@@ -22,10 +24,13 @@ function StatCard({
       {loading ? (
         <div className="h-10 w-32 animate-pulse rounded-lg bg-slate-200 dark:bg-white/10" />
       ) : (
-        <p className="font-mono text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
-          {display.toLocaleString()}
-          {suffix && <span className="ml-1.5 text-lg text-slate-500 dark:text-slate-400">{suffix}</span>}
-        </p>
+        <>
+          <p className="font-mono text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+            {display.toLocaleString()}
+            {suffix && <span className="ml-1.5 text-lg text-slate-500 dark:text-slate-400">{suffix}</span>}
+          </p>
+          {caption && <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">{caption}</p>}
+        </>
       )}
     </TerminalWindow>
   )
@@ -66,7 +71,12 @@ export default function Stats() {
           suffix="day streak"
           loading={streak === null}
         />
-        <StatCard title="music.app --lifetime-plays" value={musicPlays} suffix="lifetime plays" />
+        <StatCard
+          title="music.app --lifetime-plays"
+          value={musicPlays}
+          suffix="songs played"
+          caption="On Apple Music, since I started using it"
+        />
       </div>
     </Section>
   )
