@@ -1,0 +1,66 @@
+name: Deploy backend
+
+# Only the API needs redeploying — the frontend is built by Cloudflare Pages on
+# its own push trigger. assets/ is included because it is baked into the image
+# as the fallback content.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'assets/**'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: resume-site-503602
+  REGION: us-west1
+  SERVICE: osher-ai-twin
+  REGISTRY: us-west1-docker.pkg.dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required to mint the OIDC token for Workload Identity
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/374199633508/locations/global/workloadIdentityPools/github/providers/github-provider
+          service_account: github-deployer@resume-site-503602.iam.gserviceaccount.com
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGISTRY }} --quiet
+
+      - name: Build and push image
+        id: image
+        run: |
+          IMAGE="${REGISTRY}/${PROJECT_ID}/containers/${SERVICE}:${GITHUB_SHA::7}"
+          # Build context is the repo root so assets/ is included.
+          docker build -f backend/Dockerfile -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Cloud Run
+        run: |
+          # Only --image is passed: env vars and secret bindings already on the
+          # service are preserved. Passing --set-env-vars here would wipe them.
+          gcloud run deploy "$SERVICE" \
+            --image="${{ steps.image.outputs.image }}" \
+            --region="$REGION" \
+            --project="$PROJECT_ID" \
+            --quiet
+
+      - name: Smoke test
+        run: |
+          URL=$(gcloud run services describe "$SERVICE" --region="$REGION" \
+            --project="$PROJECT_ID" --format='value(status.url)')
+          echo "Deployed: $URL"
+          curl -fsS --retry 5 --retry-delay 3 --retry-connrefused "$URL/health"
