@@ -215,8 +215,10 @@ Only after the new site is verified end-to-end:
    still calling it?" is cheap insurance) and release its static IP, or it keeps billing.
 3. Delete the keep-alive Lambda + its EventBridge schedule (`old_lambda_function/`).
    Cloud Run scales to zero, so nothing needs pinging.
-4. Remove the dead Streamlit surface from the repo: `Home.py`, `pages/`, `chatbot/`,
-   `db/`, `update.py`, `utils/`, `.streamlit/`, and the root `pyproject.toml` / `uv.lock`.
+4. ✅ Done — removed the dead Streamlit surface from the repo: `Home.py`, `pages/`,
+   `chatbot/`, `db/`, `update.py`, `utils/`, `.streamlit/`, root `pyproject.toml` /
+   `uv.lock`, plus `old_lambda_function/`, `app_thumbnail.png`, and the
+   Streamlit-only `.devcontainer/`.
 5. Set a **monthly spend cap** in the Anthropic Console, and a GCP budget alert.
 
 ## Expected cost
