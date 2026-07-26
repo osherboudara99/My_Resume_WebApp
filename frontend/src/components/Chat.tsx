@@ -11,6 +11,7 @@ const SUGGESTIONS = [
 
 export default function Chat() {
   const [open, setOpen] = useState(false)
+  const [hintVisible, setHintVisible] = useState(false)
   const [messages, setMessages] = useState<ChatTurn[]>([])
   const [input, setInput] = useState('')
   const [streaming, setStreaming] = useState(false)
@@ -22,6 +23,21 @@ export default function Chat() {
   }, [messages, open])
 
   useEffect(() => () => abortRef.current?.abort(), [])
+
+  // Draws attention to the chat button on every page load — dismissed by
+  // opening the chat, closing the bubble explicitly, or after a while.
+  useEffect(() => {
+    const showTimer = setTimeout(() => setHintVisible(true), 1500)
+    const hideTimer = setTimeout(() => setHintVisible(false), 10_000)
+    return () => {
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (open) setHintVisible(false)
+  }, [open])
 
   async function send(text: string) {
     const question = text.trim()
@@ -67,6 +83,31 @@ export default function Chat() {
 
   return (
     <>
+      <AnimatePresence>
+        {hintVisible && !open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.18 }}
+            className="fixed right-5 bottom-24 z-50 flex max-w-[15rem] items-start gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm shadow-xl dark:border-white/10 dark:bg-[#14141d]"
+          >
+            <p className="text-slate-700 dark:text-slate-200">
+              <span className="font-mono text-accent dark:text-accent-soft">$</span> Hey — talk to
+              me, I'm {TWIN_NAME}
+            </p>
+            <button
+              type="button"
+              onClick={() => setHintVisible(false)}
+              aria-label="Dismiss"
+              className="shrink-0 text-slate-400 transition-colors hover:text-slate-700 dark:hover:text-slate-200"
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}

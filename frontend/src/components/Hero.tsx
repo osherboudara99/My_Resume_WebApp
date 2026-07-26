@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import TypedTitle from './TypedTitle'
+import TerminalWindow from './TerminalWindow'
 import { BIO, NAME, SOCIALS, TITLES, TWIN_NAME } from '../data/site'
 
 function LinkedInIcon() {
@@ -64,24 +65,28 @@ export default function Hero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="relative mt-16 flex flex-col items-center gap-8 rounded-2xl border border-slate-200 bg-slate-50/60 p-8 sm:flex-row sm:items-start dark:border-white/10 dark:bg-white/[0.03]"
+        className="relative mt-16"
       >
-        <img
-          src="/self.jpeg"
-          alt={NAME}
-          width={200}
-          height={200}
-          className="size-44 shrink-0 rounded-2xl object-cover shadow-lg"
-        />
-        <div className="space-y-4 text-left text-[15px] leading-relaxed">
-          {BIO.map((paragraph) => (
-            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-          ))}
-          <p>
-            Feel free to chat with <span className="text-slate-900 dark:text-slate-100">{TWIN_NAME}</span>{' '}
-            to learn more about my work and projects.
-          </p>
-        </div>
+        <TerminalWindow
+          title="~/osher-boudara/about.sh"
+          bodyClassName="flex flex-col items-center gap-8 p-8 sm:flex-row sm:items-start"
+        >
+          <img
+            src="/self.jpeg"
+            alt={NAME}
+            width={200}
+            height={200}
+            className="size-44 shrink-0 rounded-2xl object-cover shadow-lg"
+          />
+          <div className="space-y-4 text-left text-[15px] leading-relaxed">
+            <p>{BIO}</p>
+            <p>
+              Feel free to chat with{' '}
+              <span className="text-slate-900 dark:text-slate-100">{TWIN_NAME}</span> to learn
+              more about my work and projects.
+            </p>
+          </div>
+        </TerminalWindow>
       </motion.div>
     </section>
   )

@@ -5,6 +5,7 @@ export const API_BASE = import.meta.env.VITE_API_BASE_URL ?? ""
 export interface Repo {
   name: string
   html_url: string
+  homepage: string | null
   description: string | null
   language: string[]
   fork: boolean
@@ -23,6 +24,16 @@ export async function fetchRepos(): Promise<Repo[]> {
   if (!res.ok) throw new Error("Failed to load repos")
   const data = await res.json()
   return data.repos as Repo[]
+}
+
+export interface GithubStats {
+  current_streak: number
+}
+
+export async function fetchGithubStats(): Promise<GithubStats> {
+  const res = await fetch(`${API_BASE}/api/github/stats`)
+  if (!res.ok) throw new Error("Failed to load GitHub stats")
+  return (await res.json()) as GithubStats
 }
 
 export async function fetchResumeMarkdown(): Promise<string> {

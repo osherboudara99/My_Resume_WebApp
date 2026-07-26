@@ -7,7 +7,7 @@ don't hammer the GitHub API on every page load.
 
 import threading
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import httpx
 from dateutil import relativedelta
@@ -79,6 +79,7 @@ def get_repos() -> list[dict]:
                     {
                         "name": repo["name"],
                         "html_url": repo["html_url"],
+                        "homepage": repo.get("homepage") or None,
                         "description": repo["description"],
                         "language": _fetch_languages(client, username, repo["name"]),
                         "fork": repo["fork"],
@@ -100,4 +101,150 @@ def get_repos() -> list[dict]:
 
     with _lock:
         _cache["repos"] = {"value": result, "ts": time.monotonic()}
+    return result
+
+
+# Event types that count as "real work" for the streak — pushes (to any
+# branch, unlike the profile contribution calendar which only counts a
+# repo's default branch), PR activity, and issue activity. Deliberately
+# excludes noise like WatchEvent (starring a repo) or ForkEvent.
+_ACTIVITY_EVENT_TYPES = {
+    "PushEvent",
+    "PullRequestEvent",
+    "PullRequestReviewEvent",
+    "PullRequestReviewCommentEvent",
+    "IssuesEvent",
+    "IssueCommentEvent",
+    "CreateEvent",
+}
+
+_CONTRIB_QUERY = """
+query($from: DateTime!, $to: DateTime!) {
+  viewer {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar {
+        weeks { contributionDays { date contributionCount } }
+      }
+    }
+  }
+}
+"""
+
+
+def _account_created_date(client: httpx.Client, username: str):
+    resp = client.get(f"https://api.github.com/users/{username}", headers=_headers())
+    resp.raise_for_status()
+    created = resp.json()["created_at"]
+    return datetime.strptime(created, "%Y-%m-%dT%H:%M:%SZ").date()
+
+
+def _contribution_days(client: httpx.Client, start, end) -> dict[str, int]:
+    """Day -> contributionCount for [start, end] (must be <= 1 year), via
+    GraphQL. Only counts default-branch commits plus PR/issue activity —
+    used solely as a deep-history fallback once the events feed runs out.
+    """
+    resp = client.post(
+        "https://api.github.com/graphql",
+        json={
+            "query": _CONTRIB_QUERY,
+            "variables": {
+                "from": f"{start.isoformat()}T00:00:00Z",
+                "to": f"{end.isoformat()}T23:59:59Z",
+            },
+        },
+        headers={"Authorization": f"Bearer {settings.github_key}"},
+    )
+    resp.raise_for_status()
+    weeks = resp.json()["data"]["viewer"]["contributionsCollection"]["contributionCalendar"][
+        "weeks"
+    ]
+    return {day["date"]: day["contributionCount"] for week in weeks for day in week["contributionDays"]}
+
+
+def _extend_streak_past_year(client: httpx.Client, username: str, day) -> int:
+    """Continues a streak walk backward from `day` using the GraphQL
+    contribution calendar, a year at a time, until a zero-activity day or
+    the account's creation date. Only called once the trailing-year window
+    is exhausted and the streak is still unbroken at that edge.
+    """
+    created = _account_created_date(client, username)
+    extra = 0
+    window_end = day
+    while window_end >= created:
+        window_start = max(created, window_end - timedelta(days=364))
+        counts = _contribution_days(client, window_start, window_end)
+        d = window_end
+        while d >= window_start:
+            if counts.get(d.isoformat(), 0) <= 0:
+                return extra
+            extra += 1
+            d -= timedelta(days=1)
+        window_end = window_start - timedelta(days=1)
+    return extra
+
+
+def get_stats() -> dict:
+    """Current streak of days with GitHub activity, across every repo the
+    token can see — public, private, and org.
+
+    A day counts as active if EITHER of two sources says so: the
+    authenticated /users/{username}/events feed (catches pushes to any
+    branch, unlike the profile contribution calendar which only counts a
+    repo's default branch) or the GraphQL contribution calendar (catches
+    activity the events feed misses — testing showed GitHub's events feed
+    isn't fully complete even within its own retention window, so it can't
+    be trusted alone). The calendar covers a full trailing year in one
+    call; anything older falls back to _extend_streak_past_year, a year at
+    a time, only once a streak walk actually reaches that edge unbroken.
+    """
+    with _lock:
+        entry = _cache.get("stats")
+        if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
+            return entry["value"]
+
+    username = settings.github_username
+    result = {"current_streak": 0}
+    try:
+        with httpx.Client(timeout=20) as client:
+            active_days: set[str] = set()
+
+            for page in range(1, 4):  # 3 x 100 = GitHub's 300-event cap
+                resp = client.get(
+                    f"https://api.github.com/users/{username}/events",
+                    params={"per_page": 100, "page": page},
+                    headers=_headers(),
+                )
+                resp.raise_for_status()
+                events = resp.json()
+                if not events:
+                    break
+                for event in events:
+                    if event.get("type") in _ACTIVITY_EVENT_TYPES:
+                        active_days.add(event["created_at"][:10])
+
+            today = datetime.now(timezone.utc).date()
+            year_start = today - timedelta(days=364)
+            if settings.github_key:
+                calendar = _contribution_days(client, year_start, today)
+                active_days.update(d for d, count in calendar.items() if count > 0)
+
+            streak = 0
+            day = today
+            if day.isoformat() not in active_days:
+                day -= timedelta(days=1)  # today doesn't break the streak yet
+            while day >= year_start and day.isoformat() in active_days:
+                streak += 1
+                day -= timedelta(days=1)
+
+            if day < year_start and settings.github_key:
+                streak += _extend_streak_past_year(client, username, day)
+
+            result = {"current_streak": streak}
+    except Exception:
+        with _lock:
+            prev = _cache.get("stats")
+        return prev["value"] if prev else result
+
+    with _lock:
+        _cache["stats"] = {"value": result, "ts": time.monotonic()}
     return result

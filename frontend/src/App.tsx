@@ -1,5 +1,6 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Stats from './components/Stats'
 import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Certifications from './components/Certifications'
@@ -13,6 +14,7 @@ export default function App() {
 
       <main className="mx-auto max-w-5xl px-6">
         <Hero />
+        <Stats />
         <Projects />
         <Resume />
         <Certifications />

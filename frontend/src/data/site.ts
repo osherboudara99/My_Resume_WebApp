@@ -1,9 +1,17 @@
 // Single source of truth for the site's static content. Anything the AI Twin
 // needs to know lives in the backend corpus, not here.
 
-export const NAME = 'Osher Boudara'
+export const NAME = 'osher boudara'
 export const TWIN_NAME = "Osher's AI Twin"
 export const GITHUB_USERNAME = 'osherboudara99'
+
+// Apple has no API for lifetime play count, so this is captured manually by
+// summing Music.app's per-track "played count" (see scripts/apple-music-plays.sh)
+// and re-run occasionally. `musicStats.ts` grows this number forward from
+// APPLE_MUSIC_BASE_DATE with a small deterministic daily drift so the stat
+// still feels alive between refreshes instead of going stale.
+export const APPLE_MUSIC_TOTAL_PLAYS = 71044
+export const APPLE_MUSIC_BASE_DATE = '2026-07-26'
 
 export const TITLES = [
   'an Applied AI Engineer.',
@@ -24,11 +32,8 @@ export const SOCIALS = {
     'https://www.linkedin.com/in/osher-boudara-a612921b5/details/certifications/',
 }
 
-export const BIO = [
-  "I'm a Senior Data Scientist at Cognizant, leading data science initiatives for a Fortune 500 Crop Science client. I partner closely with stakeholders to design, develop, and deploy scalable machine learning and generative AI solutions that drive measurable business impact.",
-  'My work spans statistical modeling, machine learning, generative AI, and cloud-based architectures. I specialize in transforming complex datasets into actionable insights and building production-ready systems that create lasting value.',
-  'I earned a B.S. in Computer Science with a minor in Statistics from California State University, Northridge, graduating with honors. Based in Los Angeles and bilingual, I enjoy producing and playing music, training, exploring new cuisines, and traveling — and I’m a proud Los Angeles Rams fan.',
-]
+export const BIO =
+  "I'm a Senior Data Scientist at Cognizant, building AI-powered tools for a Fortune 500 crop science client — from internal assistants to systems that model how crops respond to a changing climate. I studied computer science and statistics at CSUN, and outside of work I'm usually playing guitar with friends, hunting for new music, exercising, or catching a Rams game."
 
 export interface Certification {
   file: string
@@ -67,6 +72,7 @@ export const CERTIFICATIONS: Certification[] = [
 
 export const SECTIONS = [
   { id: 'about', label: 'About' },
+  { id: 'stats', label: 'Stats' },
   { id: 'projects', label: 'Projects' },
   { id: 'resume', label: 'Resume' },
   { id: 'certifications', label: 'Certifications' },
