@@ -83,15 +83,14 @@ export default function Projects() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         {sorted.map((repo) => (
-          <a
+          <div
             key={repo.name}
-            href={repo.html_url}
-            target="_blank"
-            rel="noreferrer"
-            className="group flex flex-col rounded-2xl border border-slate-200 p-5 transition-colors hover:border-accent/60 dark:border-white/10 dark:hover:border-accent-soft/60"
+            className="group relative flex flex-col rounded-2xl border border-slate-200 p-5 transition-colors hover:border-accent/60 dark:border-white/10 dark:hover:border-accent-soft/60"
           >
             <h3 className="font-medium tracking-tight group-hover:text-accent dark:group-hover:text-accent-soft">
-              {repo.name}
+              <a href={repo.html_url} target="_blank" rel="noreferrer" className="after:absolute after:inset-0">
+                {repo.name}
+              </a>
             </h3>
             <p className="mt-2 flex-1 text-sm">{repo.description || 'No description'}</p>
 
@@ -116,7 +115,18 @@ export default function Projects() {
                 </span>
               )}
             </div>
-          </a>
+
+            {repo.homepage && (
+              <a
+                href={repo.homepage}
+                target="_blank"
+                rel="noreferrer"
+                className="relative z-10 mt-3 inline-flex w-fit items-center gap-1 text-xs text-accent hover:underline dark:text-accent-soft"
+              >
+                Visit site ↗
+              </a>
+            )}
+          </div>
         ))}
       </div>
     </Section>

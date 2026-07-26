@@ -5,6 +5,7 @@ export const API_BASE = import.meta.env.VITE_API_BASE_URL ?? ""
 export interface Repo {
   name: string
   html_url: string
+  homepage: string | null
   description: string | null
   language: string[]
   fork: boolean

@@ -79,6 +79,7 @@ def get_repos() -> list[dict]:
                     {
                         "name": repo["name"],
                         "html_url": repo["html_url"],
+                        "homepage": repo.get("homepage") or None,
                         "description": repo["description"],
                         "language": _fetch_languages(client, username, repo["name"]),
                         "fork": repo["fork"],
