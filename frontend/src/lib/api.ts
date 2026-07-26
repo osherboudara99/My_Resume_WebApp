@@ -26,7 +26,7 @@ export async function fetchRepos(): Promise<Repo[]> {
 }
 
 export interface GithubStats {
-  total_commits: number
+  current_streak: number
 }
 
 export async function fetchGithubStats(): Promise<GithubStats> {

@@ -8,10 +8,12 @@ import TerminalWindow from './TerminalWindow'
 function StatCard({
   title,
   value,
+  suffix,
   loading,
 }: {
   title: string
   value: number
+  suffix?: string
   loading?: boolean
 }) {
   const display = useCountUp(loading ? 0 : value)
@@ -22,6 +24,7 @@ function StatCard({
       ) : (
         <p className="font-mono text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
           {display.toLocaleString()}
+          {suffix && <span className="ml-1.5 text-lg text-slate-500 dark:text-slate-400">{suffix}</span>}
         </p>
       )}
     </TerminalWindow>
@@ -29,13 +32,13 @@ function StatCard({
 }
 
 export default function Stats() {
-  const [commits, setCommits] = useState<number | null>(null)
+  const [streak, setStreak] = useState<number | null>(null)
   const [musicPlays, setMusicPlays] = useState(() => getLiveMusicPlays())
 
   useEffect(() => {
     fetchGithubStats()
-      .then((stats) => setCommits(stats.total_commits))
-      .catch(() => setCommits(null))
+      .then((stats) => setStreak(stats.current_streak))
+      .catch(() => setStreak(null))
   }, [])
 
   // Ticks the music stat forward at random moments while the tab is open,
@@ -57,7 +60,12 @@ export default function Stats() {
   return (
     <Section id="stats" title="Stats" subtitle="A few numbers, live from the source.">
       <div className="grid gap-4 sm:grid-cols-2">
-        <StatCard title="git log --oneline | wc -l" value={commits ?? 0} loading={commits === null} />
+        <StatCard
+          title="git contributions --streak"
+          value={streak ?? 0}
+          suffix="day streak"
+          loading={streak === null}
+        />
         <StatCard title="music.app --played-count" value={musicPlays} />
       </div>
     </Section>

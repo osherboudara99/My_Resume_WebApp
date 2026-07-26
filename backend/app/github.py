@@ -103,29 +103,73 @@ def get_repos() -> list[dict]:
     return result
 
 
-def get_stats() -> dict:
-    """Lifetime commit count across every repo the token can see.
+_GRAPHQL_URL = "https://api.github.com/graphql"
 
-    Uses the commit search API's `total_count`, authenticated with the same
-    token as get_repos(). A token with only public access only counts public
-    commits — give it `repo` scope so private-repo commits are included too.
+_STREAK_QUERY = """
+query($from: DateTime!, $to: DateTime!) {
+  viewer {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar {
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
+
+def get_stats() -> dict:
+    """Current daily contribution streak.
+
+    Computed from the same contribution-calendar data behind GitHub's own
+    profile page, via GraphQL (`viewer.contributionsCollection`) — so it
+    always matches what a visitor would see checking the profile directly.
+    Requires GITHUB_KEY (GraphQL has no unauthenticated access); returns 0
+    without one.
     """
     with _lock:
         entry = _cache.get("stats")
         if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
             return entry["value"]
 
-    username = settings.github_username
-    result = {"total_commits": 0}
+    result = {"current_streak": 0}
+    if not settings.github_key:
+        return result
+
+    now = datetime.now(timezone.utc)
+    one_year_ago = now - relativedelta.relativedelta(years=1)
     try:
         with httpx.Client(timeout=20) as client:
-            resp = client.get(
-                "https://api.github.com/search/commits",
-                params={"q": f"author:{username}"},
-                headers=_headers(),
+            resp = client.post(
+                _GRAPHQL_URL,
+                json={
+                    "query": _STREAK_QUERY,
+                    "variables": {
+                        "from": one_year_ago.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "to": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    },
+                },
+                headers={"Authorization": f"Bearer {settings.github_key}"},
             )
             resp.raise_for_status()
-            result = {"total_commits": resp.json().get("total_count", 0)}
+            weeks = resp.json()["data"]["viewer"]["contributionsCollection"][
+                "contributionCalendar"
+            ]["weeks"]
+            days = [day for week in weeks for day in week["contributionDays"]]
+
+            streak = 0
+            i = len(days) - 1
+            if days and days[i]["contributionCount"] == 0:
+                i -= 1  # today doesn't break the streak until it's fully over
+            while i >= 0 and days[i]["contributionCount"] > 0:
+                streak += 1
+                i -= 1
+            result = {"current_streak": streak}
     except Exception:
         with _lock:
             prev = _cache.get("stats")
