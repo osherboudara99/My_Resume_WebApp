@@ -9,8 +9,8 @@
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
   --color-ink: #08060d;
-  --color-accent: #aa3bff;
-  --color-accent-soft: #c084fc;
+  --color-accent: #3b82f6;
+  --color-accent-soft: #60a5fa;
 
   --color-surface: #ffffff;
   --color-surface-raised: #f7f6f9;
@@ -38,7 +38,7 @@
   }
 
   ::selection {
-    @apply bg-purple-500/30 text-slate-900 dark:text-white;
+    @apply bg-blue-500/30 text-slate-900 dark:text-white;
   }
 }
 
@@ -47,14 +47,14 @@
   .glow-accent {
     background-image: radial-gradient(
       55% 55% at 50% 40%,
-      rgba(170, 59, 255, 0.22) 0%,
+      rgba(59, 130, 246, 0.22) 0%,
       transparent 70%
     );
   }
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #aa3bff 0%, #6366f1 50%, #22d3ee 100%);
+    background-image: linear-gradient(100deg, #3b82f6 0%, #22d3ee 50%, #06b6d4 100%);
   }
 
 }
