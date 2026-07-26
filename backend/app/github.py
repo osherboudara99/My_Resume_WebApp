@@ -104,6 +104,12 @@ def get_repos() -> list[dict]:
 
 
 def get_stats() -> dict:
+    """Lifetime commit count across every repo the token can see.
+
+    Uses the commit search API's `total_count`, authenticated with the same
+    token as get_repos(). A token with only public access only counts public
+    commits — give it `repo` scope so private-repo commits are included too.
+    """
     with _lock:
         entry = _cache.get("stats")
         if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
