@@ -75,6 +75,7 @@ export const CERTIFICATIONS: Certification[] = [
 
 export const SECTIONS = [
   { id: 'about', label: 'About' },
+  { id: 'stats', label: 'Stats' },
   { id: 'projects', label: 'Projects' },
   { id: 'resume', label: 'Resume' },
   { id: 'certifications', label: 'Certifications' },
