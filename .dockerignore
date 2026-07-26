@@ -1,0 +1,39 @@
+# Build context is the repo root — keep the old Streamlit app, the frontend, and
+# every local artifact out of the backend image.
+
+.git
+.github
+.devcontainer
+.streamlit
+
+# Old Streamlit app (still on main until cutover, not part of the API image)
+Home.py
+update.py
+pages/
+chatbot/
+utils/
+db/
+old_lambda_function/
+app_thumbnail.png
+pyproject.toml
+uv.lock
+
+# Frontend — deployed to Cloudflare Pages, never inside the API image
+frontend/
+
+# Python / env local artifacts
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/.env
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Docs and editor noise
+docs/
+README.md
+**/README.md
+.vscode/
+.idea/
+*.log
