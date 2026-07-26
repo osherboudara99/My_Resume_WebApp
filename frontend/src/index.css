@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+/* Dark-first "AI engineer" theme. `dark` is driven by the class on <html> so the
+   toggle can override the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --color-ink: #08060d;
+  --color-accent: #aa3bff;
+  --color-accent-soft: #c084fc;
+
+  --color-surface: #ffffff;
+  --color-surface-raised: #f7f6f9;
+  --color-surface-dark: #0b0b12;
+  --color-surface-dark-raised: #14141d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-600 antialiased;
+    @apply dark:bg-[#0b0b12] dark:text-slate-400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-slate-900 dark:text-slate-100;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-purple-500/30 text-slate-900 dark:text-white;
+  }
+}
+
+@layer utilities {
+  /* Soft aurora glow used behind the hero. */
+  .glow-accent {
+    background-image: radial-gradient(
+      55% 55% at 50% 40%,
+      rgba(170, 59, 255, 0.22) 0%,
+      transparent 70%
+    );
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #aa3bff 0%, #6366f1 50%, #22d3ee 100%);
+  }
+}
+
+/* The blinking cursor for the rotating hero titles. */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-caret {
+  animation: caret-blink 1s step-end infinite;
+}
