@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      # tsc -b runs as part of build, so this covers type checking too.
+      - run: npm run build
+
+  backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      # Catches import errors and bad settings before they reach Cloud Run.
+      - name: Import check
+        working-directory: backend
+        run: uv run --frozen python -c "from app.main import app; print('app imports OK')"
+
+      # Proves the image still builds; the deploy workflow pushes it for real.
+      - name: Build image
+        run: docker build -f backend/Dockerfile -t osher-ai-twin:ci .
