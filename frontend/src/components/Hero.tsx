@@ -74,9 +74,7 @@ export default function Hero() {
           className="size-44 shrink-0 rounded-2xl object-cover shadow-lg"
         />
         <div className="space-y-4 text-left text-[15px] leading-relaxed">
-          {BIO.map((paragraph) => (
-            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-          ))}
+          <p>{BIO}</p>
           <p>
             Feel free to chat with <span className="text-slate-900 dark:text-slate-100">{TWIN_NAME}</span>{' '}
             to learn more about my work and projects.

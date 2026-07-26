@@ -32,11 +32,8 @@ export const SOCIALS = {
     'https://www.linkedin.com/in/osher-boudara-a612921b5/details/certifications/',
 }
 
-export const BIO = [
-  "I'm a Senior Data Scientist at Cognizant, leading data science initiatives for a Fortune 500 Crop Science client. I partner closely with stakeholders to design, develop, and deploy scalable machine learning and generative AI solutions that drive measurable business impact.",
-  'My work spans statistical modeling, machine learning, generative AI, and cloud-based architectures. I specialize in transforming complex datasets into actionable insights and building production-ready systems that create lasting value.',
-  'I earned a B.S. in Computer Science with a minor in Statistics from California State University, Northridge, graduating with honors. Based in Los Angeles and bilingual, I enjoy producing and playing music, training, exploring new cuisines, and traveling — and I’m a proud Los Angeles Rams fan.',
-]
+export const BIO =
+  "I'm a Senior Data Scientist and Full-Stack Applied AI Engineer at Cognizant, where I lead end-to-end data science and generative AI initiatives for a Fortune 500 crop science client — building agentic GCP applications, RAG systems, and MLOps pipelines that turn complex data into production-ready, business-critical tools. I hold a B.S. in Computer Science, minor in Statistics, from CSUN. Based in Los Angeles, I spend my off hours playing guitar, chasing down new music, and hiking — and cheering for the Rams."
 
 export interface Certification {
   file: string
