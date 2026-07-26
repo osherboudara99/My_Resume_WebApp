@@ -1,5 +1,6 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Projects from './components/Projects'
 import { NAME } from './data/site'
 
 export default function App() {
@@ -9,7 +10,7 @@ export default function App() {
 
       <main className="mx-auto max-w-5xl px-6">
         <Hero />
-        <section id="projects" className="scroll-mt-20 py-24" />
+        <Projects />
         <section id="resume" className="scroll-mt-20 py-24" />
         <section id="certifications" className="scroll-mt-20 py-24" />
       </main>
