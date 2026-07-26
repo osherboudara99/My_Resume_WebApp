@@ -33,7 +33,7 @@ export const SOCIALS = {
 }
 
 export const BIO =
-  "I'm a Senior Data Scientist and Full-Stack Applied AI Engineer at Cognizant, where I lead end-to-end data science and generative AI initiatives for a Fortune 500 crop science client — building agentic GCP applications, RAG systems, and MLOps pipelines that turn complex data into production-ready, business-critical tools. I hold a B.S. in Computer Science, minor in Statistics, from CSUN. Based in Los Angeles, I spend my off hours playing guitar, chasing down new music, and hiking — and cheering for the Rams."
+  "I'm a Senior Data Scientist at Cognizant, where I build AI-powered tools for a Fortune 500 crop science client — from internal assistants that streamline day-to-day operations to systems that model how crops will respond to a changing climate. I studied computer science and statistics at California State University, Northridge, with a year abroad at Bar Ilan University in Tel Aviv. Originally from Los Angeles, I've also lived in Phoenix and Boston before returning home. Outside of work, I enjoy playing guitar and bass, discovering new music, hiking, and following the Los Angeles Rams."
 
 export interface Certification {
   file: string
