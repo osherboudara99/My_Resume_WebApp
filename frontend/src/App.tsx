@@ -1,6 +1,8 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
+import Resume from './components/Resume'
+import Certifications from './components/Certifications'
 import { NAME } from './data/site'
 
 export default function App() {
@@ -11,8 +13,8 @@ export default function App() {
       <main className="mx-auto max-w-5xl px-6">
         <Hero />
         <Projects />
-        <section id="resume" className="scroll-mt-20 py-24" />
-        <section id="certifications" className="scroll-mt-20 py-24" />
+        <Resume />
+        <Certifications />
       </main>
 
       <footer className="border-t border-slate-200 py-10 text-center text-sm dark:border-white/10">
