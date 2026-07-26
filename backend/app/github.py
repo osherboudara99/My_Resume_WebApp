@@ -101,3 +101,30 @@ def get_repos() -> list[dict]:
     with _lock:
         _cache["repos"] = {"value": result, "ts": time.monotonic()}
     return result
+
+
+def get_stats() -> dict:
+    with _lock:
+        entry = _cache.get("stats")
+        if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
+            return entry["value"]
+
+    username = settings.github_username
+    result = {"total_commits": 0}
+    try:
+        with httpx.Client(timeout=20) as client:
+            resp = client.get(
+                "https://api.github.com/search/commits",
+                params={"q": f"author:{username}"},
+                headers=_headers(),
+            )
+            resp.raise_for_status()
+            result = {"total_commits": resp.json().get("total_count", 0)}
+    except Exception:
+        with _lock:
+            prev = _cache.get("stats")
+        return prev["value"] if prev else result
+
+    with _lock:
+        _cache["stats"] = {"value": result, "ts": time.monotonic()}
+    return result

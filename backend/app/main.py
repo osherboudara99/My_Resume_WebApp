@@ -49,6 +49,11 @@ async def repos():
     return {"repos": data}
 
 
+@app.get("/api/github/stats")
+async def github_stats():
+    return await run_in_threadpool(github.get_stats)
+
+
 @app.get("/api/resume")
 async def resume():
     markdown = await run_in_threadpool(content.get_resume_markdown)
