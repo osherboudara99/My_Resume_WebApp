@@ -58,6 +58,43 @@
   }
 }
 
+/* Markdown coming back from /api/resume — styled here rather than pulling in
+   the typography plugin for one surface. */
+.resume-md h1 {
+  @apply mt-0 mb-2 text-2xl font-semibold tracking-tight;
+}
+.resume-md h2 {
+  @apply mt-8 mb-3 border-b border-slate-200 pb-2 text-lg font-semibold tracking-tight dark:border-white/10;
+}
+.resume-md h3 {
+  @apply mt-6 mb-1 text-base font-medium;
+}
+.resume-md p {
+  @apply my-2;
+}
+.resume-md ul {
+  @apply my-2 list-disc space-y-1 pl-5;
+}
+.resume-md ol {
+  @apply my-2 list-decimal space-y-1 pl-5;
+}
+.resume-md a {
+  @apply text-accent underline underline-offset-4 dark:text-accent-soft;
+}
+.resume-md strong {
+  @apply font-medium text-slate-900 dark:text-slate-100;
+}
+.resume-md hr {
+  @apply my-6 border-slate-200 dark:border-white/10;
+}
+.resume-md table {
+  @apply my-4 w-full text-left text-sm;
+}
+.resume-md th,
+.resume-md td {
+  @apply border-b border-slate-200 py-2 pr-4 dark:border-white/10;
+}
+
 /* The blinking cursor for the rotating hero titles. */
 @keyframes caret-blink {
   0%,
