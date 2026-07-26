@@ -20,10 +20,6 @@ class Settings(BaseSettings):
     # --- GitHub ---
     github_key: str | None = os.getenv("GITHUB_KEY", None)
     github_username: str = os.getenv("GITHUB_USERNAME", "osherboudara99")
-    # Optional second account (e.g. a work GitHub identity) whose commits get
-    # summed into /api/github/stats alongside the primary account's.
-    github_work_key: str | None = os.getenv("GITHUB_WORK_KEY", None)
-    github_work_username: str = os.getenv("GITHUB_WORK_USERNAME", "osherboudara-work")
 
     # --- Live content sources ---
     # The resume is pulled fresh from Google Docs so the site always reflects

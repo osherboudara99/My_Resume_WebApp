@@ -103,39 +103,29 @@ def get_repos() -> list[dict]:
     return result
 
 
-def _commit_count(client: httpx.Client, username: str, token: str | None) -> int:
-    headers = {"Authorization": f"token {token}"} if token else {}
-    resp = client.get(
-        "https://api.github.com/search/commits",
-        params={"q": f"author:{username}"},
-        headers=headers,
-    )
-    resp.raise_for_status()
-    return resp.json().get("total_count", 0)
-
-
 def get_stats() -> dict:
-    """Lifetime commit count across every repo the configured token(s) can see.
+    """Lifetime commit count across every repo the token can see.
 
-    Uses the commit search API's `total_count`. A token with only public
-    access only counts public commits — give it `repo` scope so private-repo
-    commits are included too. If GITHUB_WORK_KEY is set, its account's
-    commits are summed in alongside the primary account's.
+    Uses the commit search API's `total_count`, authenticated with the same
+    token as get_repos(). A token with only public access only counts public
+    commits — give it `repo` scope so private-repo commits are included too.
     """
     with _lock:
         entry = _cache.get("stats")
         if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
             return entry["value"]
 
+    username = settings.github_username
     result = {"total_commits": 0}
     try:
         with httpx.Client(timeout=20) as client:
-            total = _commit_count(client, settings.github_username, settings.github_key)
-            if settings.github_work_key:
-                total += _commit_count(
-                    client, settings.github_work_username, settings.github_work_key
-                )
-            result = {"total_commits": total}
+            resp = client.get(
+                "https://api.github.com/search/commits",
+                params={"q": f"author:{username}"},
+                headers=_headers(),
+            )
+            resp.raise_for_status()
+            result = {"total_commits": resp.json().get("total_count", 0)}
     except Exception:
         with _lock:
             prev = _cache.get("stats")
