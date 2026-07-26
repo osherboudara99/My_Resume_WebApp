@@ -4,7 +4,6 @@
 import os
 import re
 import logging
-from nltk.tokenize import sent_tokenize
 from sentence_transformers import SentenceTransformer
 import chromadb
 
