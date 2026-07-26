@@ -66,7 +66,7 @@ export default function Stats() {
           suffix="day streak"
           loading={streak === null}
         />
-        <StatCard title="music.app --played-count" value={musicPlays} />
+        <StatCard title="music.app --lifetime-plays" value={musicPlays} suffix="lifetime plays" />
       </div>
     </Section>
   )
