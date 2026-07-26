@@ -1,7 +1,7 @@
 // Single source of truth for the site's static content. Anything the AI Twin
 // needs to know lives in the backend corpus, not here.
 
-export const NAME = 'Osher Boudara'
+export const NAME = 'osher boudara'
 export const TWIN_NAME = "Osher's AI Twin"
 export const GITHUB_USERNAME = 'osherboudara99'
 
@@ -33,7 +33,7 @@ export const SOCIALS = {
 }
 
 export const BIO =
-  "I'm a Senior Data Scientist at Cognizant, where I build AI-powered tools for a Fortune 500 crop science client — from internal assistants that streamline day-to-day operations to systems that model how crops will respond to a changing climate. I studied computer science and statistics at California State University, Northridge, with a year abroad at Bar Ilan University in Tel Aviv. Originally from Los Angeles, I've also lived in Phoenix and Boston before returning home. Outside of work, I enjoy playing guitar and bass, discovering new music, hiking, and following the Los Angeles Rams."
+  "I'm a Senior Data Scientist at Cognizant, building AI-powered tools for a Fortune 500 crop science client — from internal assistants to systems that model how crops respond to a changing climate. I studied computer science and statistics at CSUN, and outside of work I'm usually playing guitar with friends, hunting for new music, exercising, or catching a Rams game."
 
 export interface Certification {
   file: string
