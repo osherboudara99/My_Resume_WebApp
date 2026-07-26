@@ -213,9 +213,11 @@ bc51fc1  docs(resume): expand aboutme.txt with details from the resume
    frontend → Cloudflare Pages; DNS: apex → Pages, `api.` → Cloud Run; secrets into
    Cloud Run (`ANTHROPIC_API_KEY`, `GITHUB_KEY`, Google Doc URLs).
 4. **Set the Anthropic Console monthly spend cap.**
-5. **Cutover & teardown.** Shut down Lightsail, delete `old_lambda_function/` keep-alive hack,
-   and remove the dead Streamlit surface (`Home.py`, `pages/`, `chatbot/`, `db/`, `update.py`,
-   `.streamlit/`, root `pyproject.toml`/`uv.lock`) once the new site is live.
+5. **Cutover & teardown.** Shut down Lightsail. ✅ Repo-side teardown done: deleted
+   `old_lambda_function/` keep-alive hack, the dead Streamlit surface (`Home.py`,
+   `pages/`, `chatbot/`, `db/`, `update.py`, `utils/`, `.streamlit/`, root
+   `pyproject.toml`/`uv.lock`), plus `app_thumbnail.png` and the Streamlit-only
+   `.devcontainer/`.
 
 ## 8. Running it locally
 
