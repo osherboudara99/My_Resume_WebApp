@@ -68,7 +68,7 @@ export default function Stats() {
         loading={streak === null}
       />
       <StatCard
-        title="applemusic.app --lifetime-song-count"
+        title="applemusic.app --lifetime-play-count"
         value={musicPlays}
         suffix="songs played"
       />
