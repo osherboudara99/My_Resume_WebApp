@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import TypedTitle from './TypedTitle'
 import TerminalWindow from './TerminalWindow'
 import Stats from './Stats'
-import { BIO, NAME, SOCIALS, TITLES, TWIN_NAME } from '../data/site'
+import { BIO, NAME, SOCIALS, TITLES } from '../data/site'
 
 function LinkedInIcon() {
   return (
@@ -82,9 +82,8 @@ export default function Hero() {
           <div className="space-y-4 text-left text-[15px] leading-relaxed">
             <p>{BIO}</p>
             <p>
-              Feel free to chat with{' '}
-              <span className="text-slate-900 dark:text-slate-100">{TWIN_NAME}</span> to learn
-              more about my work and projects.
+              Questions about my work? There's a chat in the bottom corner that knows my
+              background — ask it anything.
             </p>
           </div>
         </TerminalWindow>
