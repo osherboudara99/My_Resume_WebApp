@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { fetchGithubStats } from '../lib/api'
 import { getLiveMusicPlays } from '../lib/musicStats'
 import useCountUp from '../lib/useCountUp'
-import Section from './Section'
 import TerminalWindow from './TerminalWindow'
 
 function StatCard({
@@ -57,21 +56,22 @@ export default function Stats() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Renders bare -- no section chrome or heading. This is embedded as a small
+  // block inside the About section rather than standing on its own, so the
+  // terminal card titles carry the labelling.
   return (
-    <Section id="stats" title="Stats" subtitle="A few numbers, live from the source.">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <StatCard
-          title="git contributions --streak"
-          value={streak ?? 0}
-          suffix="day streak"
-          loading={streak === null}
-        />
-        <StatCard
-          title="applemusic.app --lifetime-song-count"
-          value={musicPlays}
-          suffix="songs played"
-        />
-      </div>
-    </Section>
+    <div className="grid gap-4 sm:grid-cols-2">
+      <StatCard
+        title="git contributions --streak"
+        value={streak ?? 0}
+        suffix="day streak"
+        loading={streak === null}
+      />
+      <StatCard
+        title="applemusic.app --lifetime-song-count"
+        value={musicPlays}
+        suffix="songs played"
+      />
+    </div>
   )
 }

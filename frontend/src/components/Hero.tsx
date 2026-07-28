@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import TypedTitle from './TypedTitle'
 import TerminalWindow from './TerminalWindow'
+import Stats from './Stats'
 import { BIO, NAME, SOCIALS, TITLES, TWIN_NAME } from '../data/site'
 
 function LinkedInIcon() {
@@ -87,6 +88,15 @@ export default function Hero() {
             </p>
           </div>
         </TerminalWindow>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="relative mt-4"
+      >
+        <Stats />
       </motion.div>
     </section>
   )
