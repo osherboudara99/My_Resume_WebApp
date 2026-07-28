@@ -7,7 +7,8 @@ don't hammer the GitHub API on every page load.
 
 import threading
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import httpx
 from dateutil import relativedelta
@@ -118,6 +119,48 @@ _ACTIVITY_EVENT_TYPES = {
     "CreateEvent",
 }
 
+def _profile_tz() -> ZoneInfo:
+    return ZoneInfo(settings.github_timezone)
+
+
+def _today() -> date:
+    """Today in the profile's timezone, not UTC.
+
+    The streak has to be anchored to the day boundary the user actually lives
+    on. Anchored to UTC it read 0 for the last several hours of every Pacific
+    day: UTC had already rolled over, so the "today doesn't break the streak
+    yet" step got spent on a date that hadn't started locally, and the real
+    previous day was then one hop too far back to be counted.
+    """
+    return datetime.now(_profile_tz()).date()
+
+
+def _local_day(ts: str) -> str:
+    """UTC event timestamp -> ISO date in the profile's timezone, so event
+    days and GraphQL calendar days (which GitHub already buckets in the
+    profile timezone) share one day boundary."""
+    dt = datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    return dt.astimezone(_profile_tz()).date().isoformat()
+
+
+def _walk_streak(active_days: set[str], today: date, floor: date) -> tuple[int, date]:
+    """Count consecutive active days walking backward from `today`.
+
+    An inactive `today` does not break the streak -- the day isn't over yet --
+    but any earlier gap does. Stops at `floor`, returning the streak and the
+    first day it couldn't account for so the caller can decide whether to keep
+    walking into older history.
+    """
+    streak = 0
+    day = today
+    if day.isoformat() not in active_days:
+        day -= timedelta(days=1)
+    while day >= floor and day.isoformat() in active_days:
+        streak += 1
+        day -= timedelta(days=1)
+    return streak, day
+
+
 _CONTRIB_QUERY = """
 query($from: DateTime!, $to: DateTime!) {
   viewer {
@@ -220,21 +263,15 @@ def get_stats() -> dict:
                     break
                 for event in events:
                     if event.get("type") in _ACTIVITY_EVENT_TYPES:
-                        active_days.add(event["created_at"][:10])
+                        active_days.add(_local_day(event["created_at"]))
 
-            today = datetime.now(timezone.utc).date()
+            today = _today()
             year_start = today - timedelta(days=364)
             if settings.github_key:
                 calendar = _contribution_days(client, year_start, today)
                 active_days.update(d for d, count in calendar.items() if count > 0)
 
-            streak = 0
-            day = today
-            if day.isoformat() not in active_days:
-                day -= timedelta(days=1)  # today doesn't break the streak yet
-            while day >= year_start and day.isoformat() in active_days:
-                streak += 1
-                day -= timedelta(days=1)
+            streak, day = _walk_streak(active_days, today, year_start)
 
             if day < year_start and settings.github_key:
                 streak += _extend_streak_past_year(client, username, day)
