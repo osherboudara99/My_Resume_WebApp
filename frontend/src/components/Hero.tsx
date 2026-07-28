@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import TypedTitle from './TypedTitle'
 import TerminalWindow from './TerminalWindow'
-import { BIO, NAME, SOCIALS, TITLES, TWIN_NAME } from '../data/site'
+import Stats from './Stats'
+import { BIO, NAME, SOCIALS, TITLES } from '../data/site'
 
 function LinkedInIcon() {
   return (
@@ -21,7 +22,7 @@ function GitHubIcon() {
 
 export default function Hero() {
   return (
-    <section id="about" className="relative scroll-mt-20 pt-16 pb-24">
+    <section id="about" className="relative scroll-mt-20 pt-16 pb-10">
       <div
         className="glow-accent pointer-events-none absolute inset-x-0 -top-32 h-[32rem]"
         aria-hidden="true"
@@ -65,7 +66,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="relative mt-16"
+        className="relative mt-10"
       >
         <TerminalWindow
           title="~/osher-boudara/about.sh"
@@ -81,12 +82,20 @@ export default function Hero() {
           <div className="space-y-4 text-left text-[15px] leading-relaxed">
             <p>{BIO}</p>
             <p>
-              Feel free to chat with{' '}
-              <span className="text-slate-900 dark:text-slate-100">{TWIN_NAME}</span> to learn
-              more about my work and projects.
+              Questions about my work? There's a chat in the bottom corner that knows my
+              background — ask it anything.
             </p>
           </div>
         </TerminalWindow>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="relative mt-4"
+      >
+        <Stats />
       </motion.div>
     </section>
   )

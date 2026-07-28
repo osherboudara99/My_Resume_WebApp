@@ -33,7 +33,7 @@ export const SOCIALS = {
 }
 
 export const BIO =
-  "I'm a Senior Data Scientist at Cognizant, building AI-powered tools for a Fortune 500 crop science client — from internal assistants to systems that model how crops respond to a changing climate. I studied computer science and statistics at CSUN, and outside of work I'm usually playing guitar with friends, hunting for new music, exercising, or catching a Rams game."
+  "I'm a Senior Data Scientist at Cognizant, building AI-powered tools for a Fortune 500 crop science client — from multi-agent RAG systems to simulations that model how crops respond to a changing climate. I studied computer science and statistics at CSUN, and outside of work I'm usually playing guitar with friends, hunting for new music, exercising, or catching a Rams game."
 
 export interface Certification {
   file: string
@@ -72,7 +72,6 @@ export const CERTIFICATIONS: Certification[] = [
 
 export const SECTIONS = [
   { id: 'about', label: 'About' },
-  { id: 'stats', label: 'Stats' },
   { id: 'projects', label: 'Projects' },
   { id: 'resume', label: 'Resume' },
   { id: 'certifications', label: 'Certifications' },
