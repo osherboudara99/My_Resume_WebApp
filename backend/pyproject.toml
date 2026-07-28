@@ -12,7 +12,21 @@ dependencies = [
     "pydantic>=2.7",
     "pydantic-settings>=2.3",
     "slowapi>=0.1.9",
+    # Windows has no system tz database, so zoneinfo can't resolve the streak's
+    # profile timezone without this. Ships the IANA data with the app.
+    "tzdata>=2024.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
 ]
 
 [tool.uv]
 package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The backend runs as a plain source tree (package = false), so app/ isn't
+# installed -- put backend/ on sys.path so `from app import ...` resolves.
+pythonpath = ["."]
