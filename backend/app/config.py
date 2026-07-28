@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     # --- GitHub ---
     github_key: str | None = os.getenv("GITHUB_KEY", None)
     github_username: str = os.getenv("GITHUB_USERNAME", "osherboudara99")
+    # IANA zone the contribution streak is measured in. Must match the GitHub
+    # profile's timezone, since that's the boundary GitHub buckets contribution
+    # days on -- and it's the day boundary a human reading the stat means.
+    github_timezone: str = os.getenv("GITHUB_TIMEZONE", "America/Los_Angeles")
 
     # --- Live content sources ---
     # The resume is pulled fresh from Google Docs so the site always reflects
