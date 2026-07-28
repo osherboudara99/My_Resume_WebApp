@@ -82,8 +82,7 @@ export default function Hero() {
           <div className="space-y-4 text-left text-[15px] leading-relaxed">
             <p>{BIO}</p>
             <p>
-              Questions about my work? There's a chat in the bottom corner that knows my
-              background — ask it anything.
+              Questions about my work? There's a AI chatbot in the bottom right corner that can answer questions in my place. Ask away.
             </p>
           </div>
         </TerminalWindow>
