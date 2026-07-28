@@ -22,7 +22,7 @@ function GitHubIcon() {
 
 export default function Hero() {
   return (
-    <section id="about" className="relative scroll-mt-20 pt-16 pb-24">
+    <section id="about" className="relative scroll-mt-20 pt-16 pb-10">
       <div
         className="glow-accent pointer-events-none absolute inset-x-0 -top-32 h-[32rem]"
         aria-hidden="true"
@@ -66,7 +66,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="relative mt-16"
+        className="relative mt-10"
       >
         <TerminalWindow
           title="~/osher-boudara/about.sh"
