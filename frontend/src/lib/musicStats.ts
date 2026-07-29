@@ -28,10 +28,13 @@ function dateKey(d: Date): string {
 }
 
 // A given calendar day always "listens to" the same random amount, between
-// 10 and 50 plays, so the total keeps drifting forward day over day.
+// 5 and 25 plays, so the total keeps drifting forward day over day. The draw is
+// squared to skew it toward the low end: the median day lands on 10 rather than
+// the 15 a flat 5-25 spread would give, with the heavier days as the tail.
 function dailyIncrementTarget(key: string): number {
   const rand = mulberry32(hashString(key))
-  return 10 + Math.floor(rand() * 41)
+  const skewed = rand() ** 2
+  return 5 + Math.floor(skewed * 21)
 }
 
 // Reveals today's increment one tick at a time at random moments through the
