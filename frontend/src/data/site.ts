@@ -10,8 +10,8 @@ export const GITHUB_USERNAME = 'osherboudara99'
 // and re-run occasionally. `musicStats.ts` grows this number forward from
 // APPLE_MUSIC_BASE_DATE with a small deterministic daily drift so the stat
 // still feels alive between refreshes instead of going stale.
-export const APPLE_MUSIC_TOTAL_PLAYS = 71044
-export const APPLE_MUSIC_BASE_DATE = '2026-07-26'
+export const APPLE_MUSIC_TOTAL_PLAYS = 71085
+export const APPLE_MUSIC_BASE_DATE = '2026-07-29'
 
 export const TITLES = [
   'an Applied AI Engineer.',
