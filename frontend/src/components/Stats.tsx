@@ -62,7 +62,7 @@ export default function Stats() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <StatCard
-        title="git contributions --streak"
+        title="git contributions --streak --all-accounts"
         value={streak ?? 0}
         suffix="day streak"
         loading={streak === null}
