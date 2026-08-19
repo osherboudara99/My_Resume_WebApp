@@ -162,8 +162,8 @@ def _walk_streak(active_days: set[str], today: date, floor: date) -> tuple[int, 
 
 
 _CONTRIB_QUERY = """
-query($from: DateTime!, $to: DateTime!) {
-  viewer {
+query($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
     contributionsCollection(from: $from, to: $to) {
       contributionCalendar {
         weeks { contributionDays { date contributionCount } }
@@ -181,16 +181,19 @@ def _account_created_date(client: httpx.Client, username: str):
     return datetime.strptime(created, "%Y-%m-%dT%H:%M:%SZ").date()
 
 
-def _contribution_days(client: httpx.Client, start, end) -> dict[str, int]:
-    """Day -> contributionCount for [start, end] (must be <= 1 year), via
-    GraphQL. Only counts default-branch commits plus PR/issue activity —
-    used solely as a deep-history fallback once the events feed runs out.
+def _contribution_days(client: httpx.Client, username: str, start, end) -> dict[str, int]:
+    """Day -> contributionCount for `username` over [start, end] (must be
+    <= 1 year), via GraphQL. Queries `user(login:)` rather than `viewer` so
+    one token can pull the public calendar of any account, not just its
+    own — used solely as a deep-history fallback once the events feed runs
+    out.
     """
     resp = client.post(
         "https://api.github.com/graphql",
         json={
             "query": _CONTRIB_QUERY,
             "variables": {
+                "login": username,
                 "from": f"{start.isoformat()}T00:00:00Z",
                 "to": f"{end.isoformat()}T23:59:59Z",
             },
@@ -198,27 +201,37 @@ def _contribution_days(client: httpx.Client, start, end) -> dict[str, int]:
         headers={"Authorization": f"Bearer {settings.github_key}"},
     )
     resp.raise_for_status()
-    weeks = resp.json()["data"]["viewer"]["contributionsCollection"]["contributionCalendar"][
+    weeks = resp.json()["data"]["user"]["contributionsCollection"]["contributionCalendar"][
         "weeks"
     ]
     return {day["date"]: day["contributionCount"] for week in weeks for day in week["contributionDays"]}
 
 
-def _extend_streak_past_year(client: httpx.Client, username: str, day) -> int:
+def _extend_streak_past_year(
+    client: httpx.Client, usernames: list[str], created_dates: dict[str, date], day
+) -> int:
     """Continues a streak walk backward from `day` using the GraphQL
-    contribution calendar, a year at a time, until a zero-activity day or
-    the account's creation date. Only called once the trailing-year window
-    is exhausted and the streak is still unbroken at that edge.
+    contribution calendars of every tracked account, a year at a time,
+    until a day with no activity on any account or the earliest account's
+    creation date. Only called once the trailing-year window is exhausted
+    and the streak is still unbroken at that edge.
     """
-    created = _account_created_date(client, username)
+    floor = min(created_dates.values())
     extra = 0
     window_end = day
-    while window_end >= created:
-        window_start = max(created, window_end - timedelta(days=364))
-        counts = _contribution_days(client, window_start, window_end)
+    while window_end >= floor:
+        window_start = max(floor, window_end - timedelta(days=364))
+        merged: dict[str, int] = {}
+        for username in usernames:
+            created = created_dates[username]
+            if window_end < created:
+                continue  # account didn't exist yet during this window
+            counts = _contribution_days(client, username, max(window_start, created), window_end)
+            for d, count in counts.items():
+                merged[d] = merged.get(d, 0) + count
         d = window_end
         while d >= window_start:
-            if counts.get(d.isoformat(), 0) <= 0:
+            if merged.get(d.isoformat(), 0) <= 0:
                 return extra
             extra += 1
             d -= timedelta(days=1)
@@ -227,54 +240,59 @@ def _extend_streak_past_year(client: httpx.Client, username: str, day) -> int:
 
 
 def get_stats() -> dict:
-    """Current streak of days with GitHub activity, across every repo the
-    token can see — public, private, and org.
+    """Current streak of days with GitHub activity, merged across every
+    tracked account (see settings.streak_usernames) and every repo the
+    token can see on each — public, private, and org.
 
-    A day counts as active if EITHER of two sources says so: the
-    authenticated /users/{username}/events feed (catches pushes to any
-    branch, unlike the profile contribution calendar which only counts a
-    repo's default branch) or the GraphQL contribution calendar (catches
-    activity the events feed misses — testing showed GitHub's events feed
-    isn't fully complete even within its own retention window, so it can't
-    be trusted alone). The calendar covers a full trailing year in one
-    call; anything older falls back to _extend_streak_past_year, a year at
-    a time, only once a streak walk actually reaches that edge unbroken.
+    A day counts as active if ANY tracked account has activity on it, and
+    within an account, if EITHER of two sources says so: the authenticated
+    /users/{username}/events feed (catches pushes to any branch, unlike the
+    profile contribution calendar which only counts a repo's default
+    branch) or the GraphQL contribution calendar (catches activity the
+    events feed misses — testing showed GitHub's events feed isn't fully
+    complete even within its own retention window, so it can't be trusted
+    alone). The calendar covers a full trailing year in one call per
+    account; anything older falls back to _extend_streak_past_year, a year
+    at a time, only once a streak walk actually reaches that edge unbroken.
     """
     with _lock:
         entry = _cache.get("stats")
         if entry and (time.monotonic() - entry["ts"]) < _CACHE_TTL:
             return entry["value"]
 
-    username = settings.github_username
+    usernames = settings.streak_usernames
     result = {"current_streak": 0}
     try:
         with httpx.Client(timeout=20) as client:
             active_days: set[str] = set()
 
-            for page in range(1, 4):  # 3 x 100 = GitHub's 300-event cap
-                resp = client.get(
-                    f"https://api.github.com/users/{username}/events",
-                    params={"per_page": 100, "page": page},
-                    headers=_headers(),
-                )
-                resp.raise_for_status()
-                events = resp.json()
-                if not events:
-                    break
-                for event in events:
-                    if event.get("type") in _ACTIVITY_EVENT_TYPES:
-                        active_days.add(_local_day(event["created_at"]))
+            for username in usernames:
+                for page in range(1, 4):  # 3 x 100 = GitHub's 300-event cap
+                    resp = client.get(
+                        f"https://api.github.com/users/{username}/events",
+                        params={"per_page": 100, "page": page},
+                        headers=_headers(),
+                    )
+                    resp.raise_for_status()
+                    events = resp.json()
+                    if not events:
+                        break
+                    for event in events:
+                        if event.get("type") in _ACTIVITY_EVENT_TYPES:
+                            active_days.add(_local_day(event["created_at"]))
 
             today = _today()
             year_start = today - timedelta(days=364)
             if settings.github_key:
-                calendar = _contribution_days(client, year_start, today)
-                active_days.update(d for d, count in calendar.items() if count > 0)
+                for username in usernames:
+                    calendar = _contribution_days(client, username, year_start, today)
+                    active_days.update(d for d, count in calendar.items() if count > 0)
 
             streak, day = _walk_streak(active_days, today, year_start)
 
             if day < year_start and settings.github_key:
-                streak += _extend_streak_past_year(client, username, day)
+                created_dates = {u: _account_created_date(client, u) for u in usernames}
+                streak += _extend_streak_past_year(client, usernames, created_dates, day)
 
             result = {"current_streak": streak}
     except Exception:

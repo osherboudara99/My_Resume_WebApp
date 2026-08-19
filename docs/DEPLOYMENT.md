@@ -125,7 +125,7 @@ gcloud run deploy "$SERVICE" \
   --cpu=1 \
   --concurrency=40 \
   --timeout=120 \
-  --set-env-vars="^##^ASSETS_DIR=/app/assets##ANTHROPIC_MODEL=claude-haiku-4-5##MAX_TOKENS=700##GITHUB_USERNAME=osherboudara99##CONTENT_TTL_SECONDS=300##CHAT_RATE_LIMIT=20/minute##GOOGLE_DOC_RESUME_URL=https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5QiKQCwdsKMlQA/##ALLOWED_ORIGINS=https://osherboudara.com,https://www.osherboudara.com" \
+  --set-env-vars="^##^ASSETS_DIR=/app/assets##ANTHROPIC_MODEL=claude-haiku-4-5##MAX_TOKENS=700##GITHUB_USERNAME=osherboudara99##GITHUB_SECONDARY_USERNAME=osherboudara-work##CONTENT_TTL_SECONDS=300##CHAT_RATE_LIMIT=20/minute##GOOGLE_DOC_RESUME_URL=https://docs.google.com/document/d/1gql8n7U8WHkdLEu6R6wFI41tLWpnY5QiKQCwdsKMlQA/##ALLOWED_ORIGINS=https://osherboudara.com,https://www.osherboudara.com" \
   --set-secrets="ANTHROPIC_API_KEY=anthropic-api-key:latest,GITHUB_KEY=github-key:latest"
 ```
 
